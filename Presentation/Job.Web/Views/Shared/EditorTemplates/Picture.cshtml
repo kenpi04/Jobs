@@ -1,0 +1,50 @@
+﻿@using Job.Web.Helper
+@using(Html.BeginScripts())
+{
+    @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+@Styles.Render("~/Scripts/uploadify/uploadify.css")
+<script type="text/javascript">
+    $(function () {
+        $('#upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")').uploadify({
+            'swf': '@Url.Content("~/Scripts/uploadify/uploadify.swf")',
+            'uploader': '/Common/UploaPicture',
+            'multi': false,
+            'method': 'post',
+            'buttonText': 'CHỌN ẢNH ĐĂNG...',
+            'auto': true,
+            'fileSizeLimit': '1MB',
+            'fileTypeExts': '*.gif; *.jpg; *.png; *.jpeg',
+            'uploadLimit': 20,
+            'cancelImg': '@Url.Content("~/Scripts/uploadify/uploadify-cancel.png")',
+            'removeCompleted': false,
+            'queueID': 'lstPic',
+            
+            'onSelect': function (file) {
+                flag_error = 1;
+            },
+            'onUploadStart': function (file) {
+                if (file == null || file.name == '') {
+                    alert('Vui lòng chọn hình ảnh đăng');
+                    $('@ViewData.TemplateInfo.GetFullHtmlFieldId("")').uploadify('stop');
+                    return;
+                }
+            },
+            'onUploadSuccess': function (file, data, response) {
+                var obj = JSON.parse(data);
+                $("#upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")").val(data.name);
+                $("#img_@ViewData.TemplateInfo.GetFullHtmlFieldId("")").attr("src", data.link);
+
+                //pictureids.push(obj.id);
+            },
+            'onQueueComplete': function (queueData) {
+              
+
+            }
+        });
+
+    })
+</script>
+}
+
+<input type="hidden" name="@ViewData.TemplateInfo.GetFullHtmlFieldName("")" id="upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")" />
+<img id="img_@ViewData.TemplateInfo.GetFullHtmlFieldId("")"/>

@@ -48,15 +48,16 @@ namespace Job.Web.Infrastructure
             // Register dependencies in controllers
             //  builder.RegisterControllers(typeof(AccountController).Assembly);
             var typesToRegisterController = Assembly.GetExecutingAssembly().GetTypes()
-      .Where(type => !String.IsNullOrEmpty(type.Namespace) && type.Namespace == "Job.Web.Controllers")
+      .Where(type => !String.IsNullOrEmpty(type.Namespace) && type.Namespace == "Job.Web.Controllers" || type.Namespace == "Job.Web.Areas.Admin.Controllers")
       .Where(type => type.BaseType != null && type.BaseType.IsClass && type.IsVisible);
             foreach (var type in typesToRegisterController)
             {
-               
-                    builder.RegisterControllers(type.Assembly);
-              
+
+                builder.RegisterControllers(type.Assembly);
+
 
             }
+          
             var container = builder.Build();
 
 

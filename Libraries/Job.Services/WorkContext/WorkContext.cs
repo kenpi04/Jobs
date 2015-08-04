@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Security;
 using Job.Services.Account;
 
-namespace Job.Service.WorkContext
+namespace Job.Services.WorkContext
 {
   public  class WorkContext:IWorkContext
     {

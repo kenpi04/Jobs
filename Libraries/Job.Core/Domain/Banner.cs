@@ -15,7 +15,7 @@ namespace Job.Core.Domain
     public partial class Banner:BaseEntityModel
     {
         public string Title { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public string ImageName { get; set; }
         public Nullable<System.DateTime> DateCreate { get; set; }
         public Nullable<bool> Active { get; set; }

@@ -9,21 +9,19 @@ using System.Web.Mvc;
 //using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Job.Web.Models;
+using Job.Services.Account;
+using System.Web.Security;
 
 namespace Job.Web.Controllers
 {
-    [Authorize]
+ 
     public class AccountController : Controller
     {
-        public AccountController()
-            
+        private readonly IUserService _userService;
+        public AccountController(IUserService userService)    
         {
+            this._userService = userService;
         }
-
-       
-
-      
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -38,13 +36,23 @@ namespace Job.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-               
+                var user = _userService.GetUserByUserName(model.UserName);
+                if (user != null)
+                { 
+                    if(user.Password==model.Password)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.UserName, model.RememberMe);
+                        if (!string.IsNullOrEmpty(returnUrl))
+                            return Redirect(returnUrl);
+                        return Redirect("/Admin");
+                    }
+                }
             }
-
+            ViewBag.Error = "Tên đăng nhập hoặc mật khẩu không hợp lệ";
             // If we got this far, something failed, redisplay form
             return View(model);
         }

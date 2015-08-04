@@ -17,10 +17,10 @@ namespace Job.Services.CareerNews
         {
             this._newsRepository = newsRepository;
         }
-        public IPagedList<News> GetAllNew(int pageIndex = 1, int pageSize = 20)
+        public IPagedList<News> GetAllNews(int pageIndex = 1, int pageSize = 20)
         {
             var q = _newsRepository.Table.OrderBy(x=>x.CreateDate);
-            return new PagedList<News>(q, pageIndex-1, pageSize);
+            return new PagedList<News>(q, pageIndex, pageSize);
 
            
         }
@@ -44,6 +44,12 @@ namespace Job.Services.CareerNews
             if (entity == null)
                 throw new ArgumentNullException("entity");
             _newsRepository.Delete(entity);
+        }
+
+
+        public News GetById(int id)
+        {
+            return _newsRepository.GetById(id);
         }
     }
 }

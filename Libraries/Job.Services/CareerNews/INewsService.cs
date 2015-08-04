@@ -11,10 +11,12 @@ namespace Job.Services.CareerNews
 {
    public interface INewsService
     {
-       IPagedList<News> GetAllNew(int pageIndex = 1, int pageSize = 20);
+       IPagedList<News> GetAllNews(int pageIndex = 1, int pageSize = 20);
        void Insert(News entity);
        void Update(News entity);
        void Delete(News entity);
 
+
+       News GetById(int id);
     }
 }

@@ -36,7 +36,7 @@ namespace Job.Core.Domain
         public int QualificationType { get; set; }
         public string Certificate { get; set; }
         public string StudySchedule { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public string CvFileName { get; set; }
         public System.DateTime DateCreate { get; set; }
         public int Status { get; set; }

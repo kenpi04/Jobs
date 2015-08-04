@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Job.Service.WorkContext
+namespace Job.Services.WorkContext
 {
   public  interface IWorkContext
     {

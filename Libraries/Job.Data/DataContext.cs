@@ -33,7 +33,7 @@ namespace Job.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("Users").HasKey(x=>x.Id);
-          
+            modelBuilder.Entity<News>().ToTable("News").HasKey(x => x.Id);
            
             base.OnModelCreating(modelBuilder);
         }

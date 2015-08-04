@@ -1,0 +1,21 @@
+﻿@using Job.Web.Helper;
+@using(Html.BeginScripts())
+{
+    @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")
+    <script type="text/javascript">
+
+    if ($('#@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)').length) {
+        CKEDITOR.replace('@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)');
+    }
+
+</script>
+<link href="~/Scripts/ckeditor/contents.css" rel="stylesheet" />
+}
+
+
+
+
+@Html.TextArea(string.Empty, /* Name suffix */
+    ViewData.TemplateInfo.FormattedModelValue /* Initial value */
+)
+

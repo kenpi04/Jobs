@@ -1,7 +1,24 @@
-﻿
+﻿@model Job.Core.Domain.News
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Đăng tin</a></li>
+        
+    </ol>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Đăng tin</div>
+    <div class="panel-body">
+        @if(ViewBag.Error!=null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+        @Html.Partial("_CreateOrUpdateNews", Model)
+    </div>
+    </div>
+
 
