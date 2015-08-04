@@ -60,6 +60,8 @@
     <Compile Include="Directory\IBannerService.cs" />
     <Compile Include="Directory\ICommonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recuiments\CareeNewsService.cs" />
+    <Compile Include="Recuiments\ICareerNewsService.cs" />
     <Compile Include="Recuiments\IRecuimentService.cs" />
     <Compile Include="Recuiments\RecuimentService.cs" />
     <Compile Include="RegisterDependencyService.cs" />

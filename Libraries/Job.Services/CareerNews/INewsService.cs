@@ -15,6 +15,7 @@ namespace Job.Services.CareerNews
        void Insert(News entity);
        void Update(News entity);
        void Delete(News entity);
+     
 
 
        News GetById(int id);

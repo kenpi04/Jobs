@@ -60,6 +60,7 @@
     <Compile Include="Domain\Banner.cs" />
     <Compile Include="Domain\BaseEntityModel.cs" />
     <Compile Include="Domain\CareerNewCate.cs" />
+    <Compile Include="Domain\CareerNews.cs" />
     <Compile Include="Domain\District.cs" />
     <Compile Include="Domain\News.cs" />
     <Compile Include="Domain\Recuitment.cs" />

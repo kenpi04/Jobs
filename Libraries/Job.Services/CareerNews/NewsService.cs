@@ -13,6 +13,7 @@ namespace Job.Services.CareerNews
     public class NewsService:INewsService
     {
         private readonly IRepository<News> _newsRepository;
+       
         public NewsService(IRepository<News> newsRepository)
         {
             this._newsRepository = newsRepository;
@@ -51,5 +52,8 @@ namespace Job.Services.CareerNews
         {
             return _newsRepository.GetById(id);
         }
+
+
+     
     }
 }

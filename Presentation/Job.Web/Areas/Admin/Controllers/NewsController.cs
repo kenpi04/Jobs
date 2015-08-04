@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Job.Services.Recuiments;
 
 namespace Job.Web.Areas.Admin.Controllers
 {
@@ -16,10 +17,12 @@ namespace Job.Web.Areas.Admin.Controllers
         // GET: /Admin/News/
         private readonly INewsService _newsService;
         private readonly IWorkContext _workContext;
-        public NewsController(INewsService newsService, IWorkContext workContext)
+        private readonly ICareerNewsService _careerNewsService;
+        public NewsController(INewsService newsService, IWorkContext workContext, ICareerNewsService careerNewsService)
         {
             _newsService = newsService;
             _workContext=workContext;
+            _careerNewsService = careerNewsService;
         }
 
         public ActionResult Index()
@@ -75,5 +78,26 @@ namespace Job.Web.Areas.Admin.Controllers
             ViewBag.Error = "Thêm không thành công";
             return View(model);
         }
-	}
+
+        #region CareerNews
+        public ActionResult CareerNewsList(int pageIndex=1,int pageSize=20)
+        {
+            var data = _careerNewsService.GetAll(pageIndex, pageSize);
+           
+            return View(data);
+        }
+        public ActionResult CreateCareerNews(int id=0)
+        {
+            var news = new CareerNews();
+            if (id > 0)
+            {
+                news = _careerNewsService.GetById(id);
+                if (news == null)
+                    return RedirectToAction("CareerNewsList");
+            }
+            ViewBag.CateList = _careerNewsService.GetAllCareerNewsCate().Select(x => new { x.Id, x.Name });
+            return View(news);
+        }
+        #endregion
+    }
 }

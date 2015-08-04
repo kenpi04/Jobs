@@ -15,7 +15,7 @@ namespace Job.Core.Domain
     public partial class CareerNewCate:BaseEntityModel
     {
         public string Name { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public Nullable<int> GroupId { get; set; }
+        public bool Active { get; set; }
+        public int GroupId { get; set; }
     }
 }

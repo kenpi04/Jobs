@@ -1,0 +1,69 @@
+﻿@model Job.Core.Domain.CareerNews
+@{
+    ViewBag.Title = "CreateCareerNews";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Đăng tin</a></li>
+
+</ol>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Đăng tin</div>
+    <div class="panel-body">
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+        @using (Html.BeginForm("CreateCareerNews", "News", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+
+            @Html.HiddenFor(x => x.Id)
+            <div class="form-group">
+                <label class="col-md-2 control-label">Tiêu đề</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-md-2 control-label">Vị trí</label>
+                <div class="col-md-10">
+                   @Html.DropDownListFor(x=>x.CateId,new SelectList(ViewBag.CateList,"Id","Name",Model.CateId))
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Tiêu đề</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Tiêu đề</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Tiêu đề</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary" value="Đăng tin" />
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

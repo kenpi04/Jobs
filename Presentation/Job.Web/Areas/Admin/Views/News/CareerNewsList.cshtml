@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<Job.Core.Domain.CareerNews>
+@{
+    ViewBag.Title = "CareerNewsList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="well">
+    <ol class="breadcrumb">
+        <li><a href="/admin">Home</a></li>
+        <li><a href="#">Danh sách tin tuyển dụng</a></li>
+
+    </ol>
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Danh sách tin tuyên dụng</div>
+    <div class="panel-body">
+        <div class="pull-right">
+            <a href="@Url.Action("CreateCareerNews")" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Tiêu đề</th>
+            <td>Vị trí</td>
+            <td>Số lượng</td>
+            <td>Ngày đăng</td>
+            <td></td>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.Title</td>
+                <td>@i.CareerNewCate.Name</td>
+                <td>@i.CreateDate</td>
+
+                <td>
+                    <a href="@Url.Action("CreateCareerNews", new { id = i.Id })"><span class="glyphicon glyphicon-align-left glyphicon-edit">Sửa</span></a> |
+                    <a data-id="@i.Id" class="delete"><span class="glyphicon glyphicon-align-left glyphicon-remove">Xóa</span></a>
+                </td>
+            </tr>
+        }
+    </table>
+    @Html.PagedListPager(Model, p => string.Format("page={0}", p))
+</div>
+

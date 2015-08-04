@@ -34,7 +34,13 @@ namespace Job.Data
         {
             modelBuilder.Entity<User>().ToTable("Users").HasKey(x=>x.Id);
             modelBuilder.Entity<News>().ToTable("News").HasKey(x => x.Id);
-           
+            modelBuilder.Entity<CareerNews>().ToTable("CareerNews").HasKey(x => x.Id).HasRequired(x=>x.CareerNewCate).WithMany().HasForeignKey(x=>x.CateId);
+            modelBuilder.Entity<District>().ToTable("District").HasKey(x => x.Id);
+            modelBuilder.Entity<StateProvice>().ToTable("StateProvice").HasKey(x => x.Id);
+            modelBuilder.Entity<WorkedCompany>().ToTable("WorkedCompany").HasKey(x => x.Id);
+            modelBuilder.Entity<CareerNewCate>().ToTable("CareerNewCate").HasKey(x => x.Id);
+            modelBuilder.Entity<Recuitment>().ToTable("Recuitment").HasKey(x => x.Id);
+            modelBuilder.Entity<Shop>().ToTable("Shop").HasKey(x => x.Id);
             base.OnModelCreating(modelBuilder);
         }
       
