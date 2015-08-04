@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Job.Core.Domain;
+using PagedList;
 
 namespace Job.Services.Recuiments
 {

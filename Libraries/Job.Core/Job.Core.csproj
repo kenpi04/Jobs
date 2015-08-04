@@ -67,8 +67,6 @@
     <Compile Include="Domain\WorkedCompany.cs" />
     <Compile Include="Helper\Encrype.cs" />
     <Compile Include="Helper\Extensions.cs" />
-    <Compile Include="PagedList\IPagedList.cs" />
-    <Compile Include="PagedList\PagedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
