@@ -40,12 +40,12 @@
                 <td>@i.CreateDate</td>
                
                 <td>
-                    <a href="@Url.Action("Create", new {id=i.Id })"><span class="glyphicon glyphicon-align-left glyphicon-edit">Sửa</span></a> |
-                    <a data-id="@i.Id" class="delete"><span class="glyphicon glyphicon-align-left glyphicon-remove">Sửa</span></a> 
+                    <a href="@Url.Action("Create", new {id=i.Id })"><span class="glyphicon glyphicon-edit">Sửa</span></a> |
+                    <a data-id="@i.Id" href="#" onclick="deleteNews(@i.Id)"  class="delete"><span class="glyphicon glyphicon-remove">Xóa</span></a> 
                 </td>
             </tr>
         }
     </table>
-    @Html.PagedListPager(Model, p => string.Format("page={0}",p))
+    @Html.PagedListPager(Model, p => string.Format("pageindex={0}",p))
 </div>
 

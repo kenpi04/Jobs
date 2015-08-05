@@ -40,5 +40,7 @@ namespace Job.Core.Domain
         public string CvFileName { get; set; }
         public System.DateTime DateCreate { get; set; }
         public int Status { get; set; }
+        public virtual  CareerNewCate Cate { get; set; }
+        public virtual District DistrictModel { get; set; }
     }
 }

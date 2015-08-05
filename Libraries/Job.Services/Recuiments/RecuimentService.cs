@@ -25,7 +25,7 @@ namespace Job.Services.Recuiments
             if (locationId != 0)
                 q = q.Where(x => x.LocationId == locationId);
             q = q.OrderBy(x => x.DateCreate);
-            return new PagedList<Recuitment>(q, pageIndex - 1, pageSize);
+            return new PagedList<Recuitment>(q, pageIndex , pageSize);
 
         }
 
@@ -50,9 +50,12 @@ namespace Job.Services.Recuiments
             _recuimentRepository.Delete(entity);
         }
 
-        public IPagedList<Recuitment> GetAll(int cateId = 0, int pageIndex = 1, int pageSize = 20)
+        
+
+
+        public Recuitment GetById(int id)
         {
-            throw new NotImplementedException();
+            return _recuimentRepository.GetById(id);
         }
     }
 }

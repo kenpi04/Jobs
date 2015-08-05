@@ -8,11 +8,11 @@ using Job.Core.Domain;
 
 namespace Job.Services.Recuiments
 {
-  public  class CareeNewsService:ICareerNewsService
+  public  class CareerNewsService:ICareerNewsService
     {
       private readonly IRepository<Job.Core.Domain.CareerNews> _careerNewsRepository;
       private readonly IRepository<CareerNewCate> _careerNewCateRepository;
-      public CareeNewsService(IRepository<Job.Core.Domain.CareerNews> careerNewsRepository, IRepository<CareerNewCate> careerNewCateRepository)
+      public CareerNewsService(IRepository<Job.Core.Domain.CareerNews> careerNewsRepository, IRepository<CareerNewCate> careerNewCateRepository)
       {
           this._careerNewCateRepository = careerNewCateRepository;
 
@@ -20,7 +20,7 @@ namespace Job.Services.Recuiments
       }
         public PagedList.IPagedList<Core.Domain.CareerNews> GetAll(int pageIndex = 1, int pageSize = 20)
         {
-            var q=_careerNewsRepository.Table;
+            var q=_careerNewsRepository.Table.OrderBy(x=>x.Id);
             return new PagedList.PagedList<Core.Domain.CareerNews>(q, pageIndex, pageSize);
         }
 

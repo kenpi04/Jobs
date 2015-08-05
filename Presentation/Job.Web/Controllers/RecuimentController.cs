@@ -8,6 +8,10 @@ namespace Job.Web.Controllers
 {
     public class RecuimentController : Controller
     {
+        public RecuimentController()
+        {
+
+        }
         //
         // GET: /Recuiment/
         public ActionResult Index()

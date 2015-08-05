@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jqueryui")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <ul class="nav navbar-nav">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Tin tức</a></li>
-                <li><a href="#">Tuyển dụng</a></li>
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="@Url.Action("List","News")">Tin tức</a></li>
+                <li><a href="@Url.Action("CareerNewsList","News")">Tuyển dụng</a></li>
                 <li><a href="#">Banner</a></li>
                 <li><a href="#">Ứng viên</a></li>
 
@@ -33,6 +34,8 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @Html.PageScripts()

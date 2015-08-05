@@ -25,8 +25,8 @@
         <tr>
             <th>Id</th>
             <th>Tiêu đề</th>
-            <td>Vị trí</td>
-            <td>Số lượng</td>
+            <td>Vị trí</td>   
+            <td>Shop/Số lượng</td>        
             <td>Ngày đăng</td>
             <td></td>
         </tr>
@@ -35,16 +35,24 @@
             <tr>
                 <td>@i.Id</td>
                 <td>@i.Title</td>
-                <td>@i.CareerNewCate.Name</td>
+                <td>@i.CareerNewCate.Name</td>             
                 <td>@i.CreateDate</td>
+                <td>
+                    <ul>
+                        @foreach(var s in i.CareerNewsShop)
+                        {
+                            <li>@s.Shop.ShopAddress (@s.Quantity) - @s.EndDate.ToString("dd-MM-yyyy")</li>
+                        }
+                    </ul>
 
+                </td>
                 <td>
                     <a href="@Url.Action("CreateCareerNews", new { id = i.Id })"><span class="glyphicon glyphicon-align-left glyphicon-edit">Sửa</span></a> |
-                    <a data-id="@i.Id" class="delete"><span class="glyphicon glyphicon-align-left glyphicon-remove">Xóa</span></a>
+                    <a href="#" data-id="@i.Id" onclick="deleteCarrerNews(@i.Id)" class="delete"><span class="glyphicon glyphicon-remove">Xóa</span></a>
                 </td>
             </tr>
         }
     </table>
-    @Html.PagedListPager(Model, p => string.Format("page={0}", p))
+    @Html.PagedListPager(Model, p => string.Format("pageIndex={0}", p))
 </div>
 

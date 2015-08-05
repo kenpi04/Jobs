@@ -11,10 +11,12 @@ namespace Job.Services.Recuiments
 {
    public interface IRecuimentService
     {
-       IPagedList<Recuitment> GetAll(int cateId = 0, int pageIndex = 1, int pageSize = 20);
+       IPagedList<Core.Domain.Recuitment> GetAll(int cateId = 0, int locationId = 0, int pageIndex = 1, int pageSize = 20);
        void Insert(Recuitment entity);
        void Update(Recuitment entity);
        void Delete(Recuitment entity);
-      
+
+
+       Recuitment GetById(int id);
     }
 }

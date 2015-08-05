@@ -16,6 +16,7 @@ namespace Job.Core.Domain
     {
         public string ShopAddress { get; set; }
         public string PhoneNumber { get; set; }
-        public Nullable<int> LocationId { get; set; }
+        public int LocationId { get; set; }
+        public virtual  District  District { get; set; }
     }
 }

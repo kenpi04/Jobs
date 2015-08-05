@@ -14,7 +14,8 @@ namespace Job.Core.Domain
     
     public partial class District:BaseEntityModel
     {
-        public Nullable<int> StateProviceId { get; set; }
+        public int StateProviceId { get; set; }
         public string Name { get; set; }
+        public virtual  StateProvice StateProvice { get; set; }
     }
 }

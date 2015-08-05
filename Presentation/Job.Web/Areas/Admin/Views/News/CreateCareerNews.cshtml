@@ -2,10 +2,17 @@
 @{
     ViewBag.Title = "CreateCareerNews";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var shop = new Dictionary<int, object[]>();
+    if (Model.Id > 0)
+    {
+        shop = Model.CareerNewsShop.ToDictionary(x => x.ShopId, x => new object[] { x.EndDate.ToString("dd/MM/yyyy"), x.Id,x.Quantity });
+    }
+
 }
 <ol class="breadcrumb">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Đăng tin</a></li>
+    <li><a href="/admin">Home</a></li>
+    <li><a href="@Url.Action("CareerNewsList")">Danh sách tin tuyển dụng</a></li>
+    <li><a href="#">Đăng tin tuyển dụng</a></li>
 
 </ol>
 
@@ -16,6 +23,10 @@
         @if (ViewBag.Error != null)
         {
             <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+        @if (ViewData["mgs"] != null)
+        {
+            <div class="alert alert-info">@ViewData["mgs"]</div>
         }
         @using (Html.BeginForm("CreateCareerNews", "News", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -28,35 +39,54 @@
                     @Html.ValidationMessageFor(m => m.Title)
                 </div>
             </div>
-             <div class="form-group">
-                <label class="col-md-2 control-label">Vị trí</label>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Vị trí ứng tuyển</label>
                 <div class="col-md-10">
-                   @Html.DropDownListFor(x=>x.CateId,new SelectList(ViewBag.CateList,"Id","Name",Model.CateId))
-                    @Html.ValidationMessageFor(m => m.Title)
+                    @Html.DropDownListFor(x => x.CateId, new SelectList(ViewBag.CateList, "Id", "Name", Model.CateId), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CateId)
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">Tiêu đề</label>
+                <label class="col-md-2 control-label">Nội dung</label>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Title)
+                    @Html.EditorFor(m => m.FullDes, "CKEditor")
+                    @Html.ValidationMessageFor(m => m.FullDes)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">Mức lương</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Salary, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Salary)
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">Tiêu đề</label>
+                <label class="col-md-2 control-label">Địa điểm</label>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Title)
+                    <ul class="list-group" style="max-height:300px;overflow-y:scroll">
+                        @foreach (var m in (ViewBag.ShopList as List<Job.Core.Domain.Shop>))
+                        {
+                            <li class="list-group-item">
+
+                                @{
+                            object[] value = new object[3]{"","",""};
+                            if (Model.Id > 0 && shop.TryGetValue(m.Id, out value))
+                            {
+                                <input type="hidden" name="shop_news_@m.Id" value="@value[1]" />
+                            }
+                                }
+
+                                <input @(shop.Keys.Contains(m.Id) ? "checked=checked" : "") type="checkbox" id="shop_@m.Id" data-quantity="@(value!=null?value[2]:"")" data-id="@m.Id" data-date="@(value!=null?value[1]:"")" value="@m.Id" name="shops" />
+
+                                <label for="shop_@m.Id" class="control-label">@m.ShopAddress</label>
+
+
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Tiêu đề</label>
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Title)
-                </div>
-            </div>
-            
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -67,3 +97,33 @@
         }
     </div>
 </div>
+@section scripts{
+    <script>
+        $(function () {
+            $("input[name=shops]").change(function () {
+                var li = $(this).parent();
+                if ($(this).is(":checked")) {
+                    var input = $('<input role="date" id="dateend_' + $(this).data("id") + '" class="form-control" type="text" name="date_end_' + $(this).data("id") + '" placeholder="Ngày hết hạn" value="' + $(this).data("date") + '" />')
+
+                    li.append(input)
+                    setDatePicker("#dateend_" + $(this).data("id"));
+                    var input2 = $('<input type="number" placeholder="Số lượng tuyển" role="number" id="quantity_' + $(this).data("id") + '" class="form-control" name="quantity_' + $(this).data("id") + '" value="' + $(this).data("quantity") + '"/>');
+                    li.append(input2);
+                }
+                else {
+                    $("#dateend_" + $(this).data("id")).datepicker("destroy");
+                    $("#dateend_" + $(this).data("id")).remove();
+                    $("#quantity_" + $(this).data("id")).remove();
+                }
+            })
+            @if(Model.Id>0)
+            {
+                <text>
+            $("input:checkbox[name='shops']:checked").change();
+            </text>
+        
+            }
+
+        })
+    </script>
+}
