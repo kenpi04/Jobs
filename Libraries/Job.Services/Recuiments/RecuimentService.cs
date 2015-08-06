@@ -23,7 +23,7 @@ namespace Job.Services.Recuiments
             if (cateId > 0)
                 q = q.Where(x => x.CateId == cateId);
             if (locationId != 0)
-                q = q.Where(x => x.LocationId == locationId);
+                q = q.Where(x => x.StateProvinceId == locationId);
             q = q.OrderBy(x => x.DateCreate);
             return new PagedList<Recuitment>(q, pageIndex , pageSize);
 

@@ -1,0 +1,537 @@
+﻿
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<canvas id="imgdisplayHide" style="display: none;"></canvas>
+<div class="row row-content">
+    <div class="breadcrumbs">
+        <ul>
+            <li class="home">
+                <a href="/" title="Trở về trang chủ">Trang chủ</a>
+                <span>›</span>
+            </li>
+            <li class="category1">
+                <a href="/candidate" title="Ứng tuyển">Ứng tuyển</a>
+                <span>›</span>
+            </li>
+            <li class="category2">
+                <strong>Tạo hồ sơ ứng viên</strong>
+            </li>
+        </ul>
+    </div>
+    <div class="candidate-content">
+        <div class="divWebCandidate">
+            <div class="wrapper">
+                <!--Camera-->
+                <div id="camera-main">
+                    <div id="camera-wrap">
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div>Live Camera</div>
+                                        <div id="webcam">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-refresh fa-spin fa-lg wait-submit-camera" style="display: none"></i>
+                                        <input type="submit" value="Chụp" onclick="return Capture();" class="btnCapture">
+                                        <input type="submit" value="Đóng" onclick="return CloseCapture();" class="btnCloseCapture">
+                                        <br>
+                                        <span id="camStatus" style="display: none"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--Thông tin cá nhân-->
+                <div class="box-wrap">
+
+                    <img src="/Content/Images/tit-1.png">
+                    <div class="box-content-2">
+                        <table class="formcontrol">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 165px">
+                                        <div><b>Vị trí ứng tuyển:</b></div>
+                                    </td>
+                                    <td style="width: 500px">
+                                        <select id="ddlRecruitmentPosition" class="selectbox required123456" style="width: 324px; min-height: inherit">
+                                            <option selected="selected" value="">Chọn Vị trí ứng tuyển</option>
+                                           @foreach(var i in (ViewBag.CateList as Dictionary<int,string>))
+                                           {
+                                               <option value="@i.Key">@i.Value</option>
+                                           }
+                                        </select>
+
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                    </td>
+
+                                    <td rowspan="3">
+                                        <div class="avatar">
+                                            <div class="avatar-marsk">
+                                                <img id="avatar-webcam" height="119px" src="@Url.Content("~/Content/Images/camera.jpg")" onclick="ShowWebcam();" title="Click chụp ảnh từ Webcam">
+                                                <canvas id="imgdisplay" style="display: none;"></canvas>
+                                            </div>
+                                            <span style="font-size: 82%; color: rgb(71, 71, 71);">
+                                                (hoặc chọn ảnh từ máy tính)<br>
+                                            </span>
+
+                                            <input type="file" id="fuAvatar" name="fuAvatar">
+                                            <input type="hidden" id="isUploadControl">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="vertical-align: top">
+                                    <td>
+                                        <div>Nguyện vọng làm tại:</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="hdfListWordPlace" style="display: none">
+                                        <input type="text" class="hdfWordplaceSelected" style="display: none">
+
+                                        <input type="text" readonly="readonly" class="txtWorkPlace textinput" placeholder="Click để chọn .." onclick="ReloadShowListProvince();" style="width: 300px;">
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                        <div class="divListProvince" id="divListProvince" style="display: none;">
+                                            <div class="list-province-wrap">
+                                                @foreach(var i in (ViewBag.StateList as Dictionary<int,string>))
+                                                { 
+                                                <div class="rad-item">
+                                                    <input type="checkbox" id="rad-@i.Key" value="@i.Key" name="@i.Value">
+                                                    <label for="rad-@i.Key">@i.Value</label>
+                                                </div>
+                                                }
+                                                
+                                            </div>
+                                            <div class="button-select">
+                                                <input type="button" value="Chọn" class="c-btn" id="selWorkPlace">
+                                                <input type="button" value="Xóa chọn" class="c-btn" id="unselWorkPlace">
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="space"></div>
+                <div class="box-wrap">
+                    <img src="/Content/Images/tit-2.png">
+                    <div class="box-content-2">
+                        <table class="formcontrol" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 155px">
+                                        <div><b>Họ tên ứng viên:</b></div>
+                                    </td>
+                                    <td style="width: 360px">
+                                        <input id="txtFullname" class="textinput required123456" placeholder="Vui lòng viết hoa, có dấu ..." style="width: 250px;text-transform: capitalize;">
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                    </td>
+                                    <td>Giới tính:</td>
+                                    <td>
+                                        <div class="gender">
+                                            <input id="radMale" type="radio" name="gender" value="true" checked="checked">
+                                            <label for="radMale">Nam</label>
+                                            &nbsp;&nbsp;
+                                            <input id="radFeMale" type="radio" name="gender" value="false">
+                                            <label for="radFeMale">Nữ</label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div>Ngày sinh:</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="txtBirthDay" class="txtBirthDay textinput required123456" placeholder="VD: 05/03/1995" style="width: 250px;" readonly="">
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                    </td>
+                                    <td>
+                                        <div>Nơi sinh:</div>
+                                    </td>
+                                    <td>
+                                        <select id="ddlBirthPlace" class="selectbox" style="width: 274px">
+                                            <option selected="selected" value="0">Chọn Nơi sinh</option>
+                                          @foreach(var i in (ViewBag.StateList as Dictionary<int,string>))
+                                          {
+                                              
+                                              <option value="@i.Key">@i.Value</option>
+                                          }
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div>CMND:</div>
+                                    </td>
+                                    <td>
+                                        <input type="text" maxlength="12" id="txtIDNo" class="textinput required123456" placeholder="Vui lòng nhập chính xác" onkeypress="return InputNumberOnly(event);" style="width: 250px;">
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                    </td>
+                                    <td>Tình trạng hôn nhân:</td>
+                                    <td>
+                                        <table id="radMarriedStatus" style="width: 40%">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input id="radMarriedStatus_0" type="radio" name="MarriedStatus" value="0" checked="checked">
+                                                        <label for="radMarriedStatus_0">Độc thân</label>
+                                                    </td>
+                                                    <td>
+                                                        <input id="radMarriedStatus_1" type="radio" name="MarriedStatus" value="1">
+                                                        <label for="radMarriedStatus_1">Đã kết hôn</label>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div>Địa chỉ:</div>
+                                    </td>
+                                    <td colspan="3">
+                                        <input name="txtResident" type="text" id="txtResident" class="textinput required123456" placeholder="VD: 365 Cộng Hòa, Phường 12, Quận Tân Bình" style="width: 250px;">
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                        <span class="desc-title red">(Nơi bạn đang sống để Công ty bố trí nơi làm việc phù hợp)</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div>Tỉnh thành:</div>
+                                    </td>
+                                    <td>
+                                        <select id="ddlResidentProvince" class="selectbox" style="width: 274px">
+                                            <option selected="selected" value="">Chọn Tỉnh thành</option>
+                                            @foreach (var i in (ViewBag.StateList as Dictionary<int, string>))
+                                            {
+
+                                                <option value="@i.Key">@i.Value</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div>Quận huyện:</div>
+                                    </td>
+                                    <td>
+                                        <select id="ddlResidentDistrict" class="selectbox" style="width: 274px">
+                                            <option selected="selected" value="0">Chọn Quận/Huyện</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>
+                                        <div>Địa chỉ Email:</div>
+                                    </td>
+                                    <td>
+                                        <input name="txtEmail" type="text" id="txtEmail" class="textinput required123456" placeholder="Công ty sẽ gửi kết quả qua email" style="width: 250px;">
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                    </td>
+                                    <td>
+                                        <div>Điện thoại di động:</div>
+                                    </td>
+                                    <td>
+                                        <input name="txtMobile" type="text" id="txtMobile" class="textinput required123456" placeholder="VD: 0975667788" style="width: 250px;">
+                                        <span style="color: red; visibility: visible;">(*)</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span>Chiều cao/Cân nặng:</span>
+                                    </td>
+                                    <td>
+                                        <input name="txtHeight" type="text" id="txtHeight" class="textinput" placeholder="VD: 1m60" style="width: 95px;">
+                                        &nbsp;&nbsp;<i class="fa fa-minus"></i>&nbsp;&nbsp;
+                                        <input name="txtWeight" type="text" id="txtWeight" class="textinput" placeholder="VD: 48kg" style="width: 95px;">
+                                    </td>
+                                    <td style="vertical-align: top">
+                                        <div>Thu nhập mong muốn:</div>
+                                    </td>
+                                    <td colspan="3">
+                                        <input name="txtDesiredIncome" type="text" id="txtDesiredIncome" class="textinput" placeholder="VD: 3.000.000đ" style="width: 250px;">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4">
+                                        <div style="margin-top: 10px"><span>Vì sao bạn muốn ứng tuyển vị trí này?</span></div>
+                                        <textarea name="txtPersonalInformation" rows="6" id="txtPersonalInformation" class="textinput textarea" style="width: 96%;"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="space"></div>
+
+                <div class="box-wrap">
+                    <img src="/Content/Images/tit-3.png">
+                    <div class="box-content-2">
+                        <!-- Bang cap -->
+                        <div>
+                            <span>Trường: </span>
+                            <input name="txtShoolName" type="text" id="txtShoolName" class="textinput" placeholder="Trường" style="width: 290px;">
+                            &nbsp;&nbsp;
+                            <span>Ngành: </span>
+                            <input name="txtMajorContent" type="text" id="txtMajorContent" class="textinput" placeholder="Chuyên ngành" style="width: 290px;">
+
+                            &nbsp;&nbsp;
+                            <span>Hệ: </span>
+                            <select name="ddlQualificationType" id="ddlQualificationType" class="selectbox" style="width: 178px">
+                                <option value="0">-- Chọn Bằng cấp --</option>
+                                <option value="6">Thạc sĩ</option>
+                                <option value="5">Đại học</option>
+                                <option value="4">Cao đẳng </option>
+                                <option value="3">Trung cấp</option>
+                                <option value="2">THPT</option>
+                                <option value="10">THCS</option>
+                            </select>
+                        </div>
+
+                        <!-- Chung chi -->
+                        <div style="margin:20px 0">
+                            <div><span>Chứng chỉ khác (nếu có)</span></div>
+                            <textarea name="txtCertificate" rows="2" id="txtCertificate" class="textinput textarea" placeholder="VD: Anh Văn TOEIC 400, Tin Học B …" style="width: 96%;margin-top: 6px"></textarea>
+                        </div>
+
+                        <!-- Lich hoc -->
+                        <div>
+                            <input type="hidden" name="hdfSchedule_Morning" id="hdfSchedule_Morning">
+                            <input type="hidden" name="hdfSchedule_Afternoon" id="hdfSchedule_Afternoon">
+                            <input type="hidden" name="hdfSchedule_Evening" id="hdfSchedule_Evening">
+
+                            <div id="divStudySchedule">
+                                <table border="1" class="subtable" style="width: 98%">
+                                    <tbody>
+                                        <tr>
+                                            <td class="bg-head" style="width:260px">Lịch học (nếu đang học)</td>
+                                            <td class="bg-head">2</td>
+                                            <td class="bg-head">3</td>
+                                            <td class="bg-head">4</td>
+                                            <td class="bg-head">5</td>
+                                            <td class="bg-head">6</td>
+                                            <td class="bg-head">7</td>
+                                            <td class="bg-head">CN</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-head">Sáng</td>
+
+                                            <td>
+                                                <input type="checkbox" id="chk2" name="chk_group_morning" value="2">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk3" name="chk_group_morning" value="3">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk4" name="chk_group_morning" value="4">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk5" name="chk_group_morning" value="5">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk6" name="chk_group_morning" value="6">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk7" name="chk_group_morning" value="7">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chkCN" name="chk_group_morning" value="CN">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-head">Chiều</td>
+
+                                            <td>
+                                                <input type="checkbox" id="chk2" name="chk_group_afternoon" value="2">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk3" name="chk_group_afternoon" value="3">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk4" name="chk_group_afternoon" value="4">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk5" name="chk_group_afternoon" value="5">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk6" name="chk_group_afternoon" value="6">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk7" name="chk_group_afternoon" value="7">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chkCN" name="chk_group_afternoon" value="CN">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="bg-head">Tối</td>
+
+                                            <td>
+                                                <input type="checkbox" id="chk2" name="chk_group_evening" value="2">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk3" name="chk_group_evening" value="3">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk4" name="chk_group_evening" value="4">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk5" name="chk_group_evening" value="5">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk6" name="chk_group_evening" value="6">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chk7" name="chk_group_evening" value="7">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="chkCN" name="chk_group_evening" value="CN">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="space"></div>
+                <div class="box-wrap">
+                    <img src="/Content/Images/tit-4.png">
+                    <div class="box-content-2">
+                        <div class="box-content">
+                            <div>
+                                <div id="box-workexperience">
+                                </div>
+                                <table class="formcontrol" border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:240px">
+                                                <div><b>Công ty:</b></div>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtCompany" class="textinput" placeholder="Công ty gần đây đã làm" style="width: 323px;">
+
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span>Vị trí: </span>
+                                                <input name="txtPosition" type="text" id="txtPosition" class="textinput" placeholder="Vị trí" style="width: 300px;">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="vertical-align: top">Mô tả chi tiết công việc đã làm:</td>
+                                            <td>
+                                                <textarea name="txtNote" rows="6" id="txtNote" class="textinput textarea" style="width: 96%">
+                                                </textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="box-more-job" id="btnAddWork">
+                                    <div>
+                                        <div>
+                                            &nbsp;
+                                            <span id="imbtnAddWorkExperience"><i class="fa fa-plus-circle fa-lg"></i></span>
+                                            <input type="button" name="btnAddWork" value="Thêm nơi làm việc" class="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="box-wrap">
+                    <div class="box-content">
+                        <div class="box-content">
+                            <div class="box-control">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:700px">
+                                                <div class="f-attach">
+                                                    <span class="marskupload"><i>Đính kèm Hồ sơ cá nhân (.doc hoặc .pdf)</i>&nbsp;<img class="icon-file-attach" src="/Content/Images/file-attach.png"></span>
+                                                    <br>
+                                                    <input type="file" name="fuFileAttach" id="fuFileAttach" class="controlupload">
+                                                    <input type="hidden" id="hiddenFileAttach">
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <div style="width: 140px;">
+                                                    Tôi cam đoan thông tin trên là thật <span style="color: red; visibility: visible;">(*)</span>
+                                                    <span id="spanResetCaptcha" style="font-size: 80%; color: rgb(213, 87, 87); cursor: pointer;">reset</span>
+                                                </div>
+
+                                                <script type="text/javascript">
+                                                    //var tokenReCaptcha;
+                                                    //var verifyCallback = function (response) {
+                                                    //    alert(response);
+                                                    //};
+                                                    //var widgetId1;
+                                                    //var onloadCallback = function () {
+                                                    //    // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
+                                                    //    // The id of the reCAPTCHA widget is assigned to 'widgetId1'.
+                                                    //    widgetId1 = grecaptcha.render('example1', {
+                                                    //        'sitekey': '6LfFfgUTAAAAANB4_ncpk-COSGHVAvzJkDIYDAMH'
+                                                    //    });
+                                                    //};
+
+                                                    //function ResponeseCaptcha() {
+                                                    //    tokenReCaptcha = grecaptcha.getResponse(widgetId1);
+                                                    //}
+                                                </script>
+                                                @*<form method="post" action="javascript:ResponeseCaptcha();">
+                                                    <div id="example1" style="width: 140px;"></div>
+                                                    <input id="submitCaptcha" type="submit" value="getResponse" style="display: none">
+                                                </form>
+                                                <form action="javascript:grecaptcha.reset(widgetId1);" style="display: none">
+                                                    <input type="submit" value="reset" id="resetCaptcha">
+                                                </form>
+                                                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&amp;render=explicit&amp;hl=vi" async="" defer=""></script>*@
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: right">
+                                                <div style="margin-top: 20px">
+                                                    <input type="submit" value="Trở về" id="btnCancel" class="btnCancel c-btn-n">
+                                                    <input type="submit" value="Gửi hồ sơ" id="btnSave" class="btnSave c-btn">
+
+                                                    <div class="wait-submit" style="display: none; text-align: center;">
+                                                        <i class="fa fa-refresh fa-spin fa-2x"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.webcam.js","~/Scripts/webcandidate.js")
+ }

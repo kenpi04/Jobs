@@ -1,4 +1,4 @@
-﻿
+﻿@model Job.Core.Domain.Recuitment
 @{
     ViewBag.Title = "Chi tiết ứng viên";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -14,15 +14,149 @@
     <!-- Default panel contents -->
     <div class="panel-heading">Thông tin ứng viên</div>
     <div class="panel-body">
+        <h3>Thông tin ứng tuyển</h3>
         <div class="row-fluid">
+            <div class="col-lg-2">
+                <table class="table">
+                    <tr>
+                        <td>Vị trí</td>
+                        <td>@Model.Cate.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Nguyện vọng làm việc tại</td>
+                        <td>@Model.WorkPlace</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <h3>Thông tin cá nhân</h3>
+        <hr />
+        <div class="row-fluid">
+        
             <div class="col-md-2">
                <table class="table">
                    <tr>
                        <td>Họ và tên</td>
+                       <td>@Model.FullName</td>
+                   </tr>
+                   <tr>
+                       <td>Ngày sinh</td>
+                       <td>@Model.BirthDay.ToString("dd/MM/yyyy")</td>
+                   </tr>
+                   <tr>
+                       <td>CMND</td>
+                       <td>@Model.IdNumber</td>
+                   </tr>
+                   <tr>
+                       <td>Địa chỉ</td>
+                       <td>@Model.Address</td>
+                   </tr>
+                   <tr>
+                       <td>Tỉnh thành</td>
+                       <td>@Model.DistrictModel.StateProvice.Name</td>
+                   </tr>
+                   <tr>
+                       <td>Email</td>
+                       <td>@Model.Email</td>
+                   </tr>
+                   <tr>
+                       <td>Chiều cao- Cân nặng</td>
+                       <td>@Model.Height - @Model.Weight</td>
                    </tr>
                </table>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <table class="table">
+                    <tr>
+                        <td>Giới tính</td>
+                        <td>@(Model.Gender?"Nam":"Nữ")</td>
+                    </tr>
+                    <tr>
+                        <td>Nơi sinh</td>
+                        <td>@Model.BirthPlaceModel.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Tình trạng hôn nhân</td>
+                        <td>@(Model.MarriedStatus?"Đã kết hôn":"Độc thân")</td>
+                    </tr>
+                    <tr>
+                        <td>Quận huyện</td>
+                        <td>@Model.DistrictModel.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Điện thoại</td>
+                        <td>@Model.PhoneNumber</td>
+                    </tr>
+                    <tr>
+                        <td>Thu nhập mong muốn</td>
+                        <td>@Model.DesiredIncome</td>
+                    </tr>
+                  
+                </table>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <label>Thông tin khác</label>
+            <p class="col-lg-2">
+               @Model.PersonalInformation
+            </p>
+        </div>
+        
+        <h3>Trình độ học vấn</h3>
+        <hr />
+        <div class="row-fluid">
+            <div class="col-md-2"><label>Trường</label></div>
+            <div class="col-md-2">@Model.School</div>
+            <div class="col-md-2"><label>Ngành</label></div>
+            <div class="col-md-2">@Model.Branch</div>
+            <div class="col-md-2"><label>Hệ</label></div>
+            <div class="col-md-2">@Model.QualificationType</div>
+
+        </div>
+        <div class="row-fluid">
+           <label>Chứng chỉ khác</label>
+             <p>@Model.Certificate</p>
+        </div>
+        <div class="row-fluid">
+            <table class="table">
+                <tr>
+                   <td> Lịch học</td>
+                    <td>@Model.StudySchedule</td>
+                </tr>
+              
+            </table>
+        </div>
+        <h3>Quá trình làm việc</h3>
+        <hr />
+        @foreach(var i in Model.WokedCompany)
+        {
+            <div class="row-fluid">
+                <table class="table">
+                    <tr>
+                        <td><label>Công ty</label></td>
+                        <td>@i.Company</td>
+                        <td><label>Vị trí</label></td>
+                        <td>@i.Position</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mô tả chi tiết
+                        </td>
+                        <td colspan="3">
+                            <p>@i.Description</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <hr />
+            <p></p>
+        }
+        <div class="col-md-1">
+            <a class="btn btn-primary" href="@Url.Content("~/Content/Files/Cv/"+@Model.CvFileName)">Tải CV</a> 
+            <a class="btn btn-primary">Đã liên hệ</a>
+            <a class="btn btn-primary">Hủy</a>
         </div>
     </div>
  </div>

@@ -47,7 +47,8 @@ namespace Job.Data
             modelBuilder.Entity<CareerNewCate>().ToTable("CareerNewCate").HasKey(x => x.Id);
             var recuiment = modelBuilder.Entity<Recuitment>().ToTable("Recuitment").HasKey(x => x.Id);
             recuiment.HasRequired(x => x.Cate).WithMany().HasForeignKey(x => x.CateId);
-            recuiment.HasRequired(x => x.DistrictModel).WithMany().HasForeignKey(x => x.District);
+            recuiment.HasRequired(x => x.DistrictModel).WithMany().HasForeignKey(x => x.DistrictId);
+            recuiment.HasRequired(x => x.BirthPlaceModel).WithMany().HasForeignKey(x => x.BirthPlace);
             modelBuilder.Entity<Shop>().ToTable("Shop").HasKey(x => x.Id).HasRequired(x=>x.District).WithMany().HasForeignKey(x=>x.LocationId);
             base.OnModelCreating(modelBuilder);
         }

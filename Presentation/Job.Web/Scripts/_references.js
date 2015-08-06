@@ -249,3 +249,6 @@
 /// <reference path="uploadify/jquery.uploadify.js" />
 /// <reference path="jquery-ui-1.11.4.js" />
 /// <reference path="adminscript.js" />
+/// <reference path="public.common.js" />
+/// <reference path="jquery.webcam.js" />
+/// <reference path="webcandidate.js" />

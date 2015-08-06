@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Job.Services.Directory;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace Job.Web.Controllers
 {
     public class CommonController : Controller
     {
+        private readonly ICommonService _commonService;
+        public CommonController(ICommonService commonService)
+        {
+            this._commonService = commonService;
+        }
         //
         // GET: /Common/
         public ActionResult Index()
@@ -39,6 +45,12 @@ namespace Job.Web.Controllers
                 });
             }
             return Json("");
+        }
+        [HttpGet]
+        public JsonResult GetDistrict(int ProvinceID)
+        {
+            var data = _commonService.GetAllDistrictByStateId(ProvinceID).Select(x=>new{x.Id,x.Name});
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 	}
 }
