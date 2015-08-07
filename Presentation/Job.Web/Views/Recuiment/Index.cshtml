@@ -1,0 +1,25 @@
+﻿@{    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs">
+    <ul>
+        <li class="home">
+            <a href="/" title="Trở về trang chủ">Trang chủ</a>
+            <span>›</span>
+        </li>
+        <li class="category1">
+            <strong>Tuyển dụng</strong>
+        </li>
+    </ul>
+</div>
+<div class="span8">
+    <div class="box-wrap">
+        @Html.Action("SlideBox")
+        <div id="divRecuimentNew">
+            @Html.Action("CareerListGroup", new {groupId=1 })
+            <br />
+            @Html.Action("CareerListGroup", new { groupId = 2 })
+        </div>
+    </div>
+</div>
+

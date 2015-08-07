@@ -1,0 +1,41 @@
+﻿@model List<Job.Web.Models.CareerNews.CareerNewsModel>
+@{
+    Layout = null;
+}
+@if(Model.Count()>0)
+{ 
+    <div class="box-title" id="to-store">
+        <div class="underline">
+            <h3>@Model[0].CateGroupName</h3>
+        </div>
+        <div class="box-list">
+            <div id="overlay-2">
+                <i class="fa fa-spinner fa-spin fa-2x"></i>
+            </div>
+            <div>
+                <ul class="list-item col-2">
+                    @foreach(var item in Model)
+                    {                   
+                           <li class="item">
+                        <div class="grid-wrap">
+                            <div class="list-title"><a href="@Url.Action("Detail","Recuiment" ,new {id=item.Id })">@item.CateName (@item.Quantity)</a></div>
+
+                            <div class="catalog">
+                                <div class="provinces">@item.StateList</div>
+                            </div>
+
+                        </div>
+                    </li>
+                    }
+                        
+                </ul>
+                <div class="pager">
+                    <nav>
+
+                    </nav>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+}

@@ -2,6 +2,12 @@
     $("input[role=date]").datepicker({
             dateFormat:"dd/mm/yy"
     })
+    $("#frmCreateNews #StateProvince").change(function () {
+        getDistrict(this, "ddlDistrictId");
+    })
+    $("#frmUpdateShop select[name=State]").change(function () {
+        getDistrict(this, "ddlDistrictId");
+    })
 
 })
 function setDatePicker(id)
@@ -29,4 +35,17 @@ function deleteCarrerNews(id) {
         })
     }
     return false;
+}
+function getDistrict(e,elDistrictId)
+{
+    var selectedValue = $(e).val();
+    $("#" + elDistrictId).html("<option>Chọn quận/huyện</option>");
+    var defaultValue= $("#" + elDistrictId).data("val");
+    $.getJSON("/common/GetDistrict", { provinceId: selectedValue }, function (data) {
+        var selected = "";
+        if (defaultValue != "")
+            selected = "selected=selected"
+        for (var d in data)
+            $("#" + elDistrictId).append("<option " + selected + " value='" + data[d].Id + "'>" + data[d].Name + "</option>");
+    });
 }

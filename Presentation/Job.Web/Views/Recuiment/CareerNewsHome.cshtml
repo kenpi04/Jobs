@@ -1,0 +1,36 @@
+﻿@model List<Job.Web.Models.CareerNews.CareerNewsModel>
+@{
+    Layout = null;
+}
+
+<div class="box-list">
+    <ul class="list-item col-3">
+        @foreach(var item in Model)
+        { 
+        <li class="item" style="height:280px">
+            <div class="grid-wrap">
+                <div class="thumbnail-2">
+                    <a href="/recruitment?id=1632">
+                        <img src="@Url.Content("~/Content/Images/"+item.ImgUrl)"/>
+                    </a>
+                </div>
+                <div class="list-title"><a href="@Url.Action("RecuitmentDetail","Recuiment" ,new {id=item.Id })">@item.CateName (@item.Quantity)</a></div>
+                <div class="catalog-wrap">
+                    <div class="catalog">@item.CateGroupName</div>
+                    <div class="catalog">
+                        <div class="provinces">@item.StateList</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        }
+     
+
+    </ul>
+    <div class="clear"></div>
+
+    <div class="more-item-2">
+        <a href="@Url.Action("Index","Recuiment")">XEM THÊM</a>
+    </div>
+    <div class="clear"></div>
+</div>

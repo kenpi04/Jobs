@@ -40,5 +40,33 @@ namespace Job.Services.Directory
                 q = q.Where(x => x.LocationId == stateId);
             return q.ToList();
         }
+
+
+        public void InsertShop(Shop entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("Entity is null");
+            _shopRepository.Insert(entity);
+        }
+
+        public void DeleteShop(Shop entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("Entity is null");
+            _shopRepository.Update(entity);
+        }
+
+        public void UpdateShop(Shop entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("Entity is null");
+            _shopRepository.Delete(entity);
+        }
+
+
+        public Shop GetShopById(int id)
+        {
+            return _shopRepository.GetById(id);
+        }
     }
 }

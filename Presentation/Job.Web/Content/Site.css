@@ -1284,7 +1284,7 @@ body .main-holder {
 }
 
 .maincolor {
-    color: #f7c200;
+    color: #fff;
 }
 
 #overlay {
@@ -1328,7 +1328,7 @@ body .main-holder {
 }
 
 header {
-    background: #000;
+    background: red;
 }
 
 .container {
@@ -1411,7 +1411,7 @@ header {
         display: block;
         position: absolute;
         top: 70px;
-        background-color: #000;
+        background-color: red;
         z-index: 99;
         left: 2px;
     }
@@ -2064,7 +2064,7 @@ header {
 
 /* Footer */
 footer {
-    background: url(Images/bg-footer.jpg) center;
+    background: #ddd;
     height: 370px;
 }
 

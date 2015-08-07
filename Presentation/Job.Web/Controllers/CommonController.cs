@@ -52,5 +52,9 @@ namespace Job.Web.Controllers
             var data = _commonService.GetAllDistrictByStateId(ProvinceID).Select(x=>new{x.Id,x.Name});
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult BannerSlider()
+        {
+            return View();
+        }
 	}
 }

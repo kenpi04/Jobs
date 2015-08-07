@@ -8,6 +8,9 @@ using Job.Services.Recuiments;
 using Job.Services.Directory;
 using System.IO;
 using System.Threading.Tasks;
+using Job.Services.CareerNews;
+using Job.Web.Models.News;
+using Job.Web.Models.CareerNews;
 
 namespace Job.Web.Controllers
 {
@@ -16,6 +19,7 @@ namespace Job.Web.Controllers
         private readonly IRecuimentService _recuimentService;
         private readonly ICommonService _commonService;
         private readonly ICareerNewsService _careerNewService;
+     
         public RecuimentController( IRecuimentService recuimentService,
      ICommonService commonService,
       ICareerNewsService careerNewService)
@@ -26,9 +30,32 @@ namespace Job.Web.Controllers
         }
         //
         // GET: /Recuiment/
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
+        
+
             return View();
+        }
+        public ActionResult Detail(int id)
+        {
+            var item = _careerNewService.GetById(id);
+            if (item == null)
+                return RedirectToRoute("HomePage");
+            ViewBag.LocationId = item.CareerNewsShop.FirstOrDefault().Shop.LocationId;
+            return View(item);
+
+        }
+        public ActionResult RelativeItems(int groupId,int stateId)
+        {
+            var list = _careerNewService.GetAll(groupid: groupId, onlyHaveQuantity: true,stateId:stateId).Select(x => PrepairingCareerNews(x));
+            if (list.Count() == 0)
+                return Content("");
+            return View(list);
+        }
+        public ActionResult CareerListGroup(int groupId)
+        {
+            var list = _careerNewService.GetAll(groupid: groupId,onlyHaveQuantity:true).Select(x => PrepairingCareerNews(x));
+            return View(list);
         }
         public ActionResult Post()
         {
@@ -76,6 +103,30 @@ namespace Job.Web.Controllers
             }
           
             
+        }
+        public ActionResult SlideBox(int pageSize=10)
+        {
+            var item = _careerNewService.GetAll(pageSize: pageSize,includePriotyBox:true,onlyHaveQuantity:true).Select(x => PrepairingCareerNews(x)).ToList();
+            return View(item);
+        }
+
+       
+        public ActionResult CareerNewsHome(int pageSize=3)
+        {
+            var model = _careerNewService.GetAll(pageSize: pageSize).Select(x => PrepairingCareerNews(x)).ToList();
+            return View(model);
+        }
+        private CareerNewsModel PrepairingCareerNews(CareerNews entity)
+        {
+            return new CareerNewsModel
+            {
+                Id = entity.Id,
+                StateList = string.Join(",", entity.CareerNewsShop.Select(y => y.Shop.District.StateProvice.Name).ToList()),
+                CateGroupName = entity.CareerNewCate.GetGroup(),
+                CateName = entity.CareerNewCate.Name,
+                ImgUrl = entity.Image,
+                Quantity = entity.CareerNewsShop.Sum(y => y.Quantity),
+            };
         }
         
 	}

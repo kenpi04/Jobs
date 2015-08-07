@@ -33,8 +33,11 @@ namespace Job.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("Users").HasKey(x=>x.Id);
-            modelBuilder.Entity<News>().ToTable("News").HasKey(x => x.Id);
-            var careerMapping = modelBuilder.Entity<CareerNews>().ToTable("CareerNews").HasKey(x => x.Id);
+           var news= modelBuilder.Entity<News>().ToTable("News").HasKey(x => x.Id);
+           news.HasRequired(x => x.StateProvince).WithMany().HasForeignKey(x => x.ProvinceId);
+           news.HasOptional(x => x.District).WithMany().HasForeignKey(x => x.DistrictId);
+           news.HasRequired(x => x.User).WithMany().HasForeignKey(x => x.CreateBy);
+           var careerMapping = modelBuilder.Entity<CareerNews>().ToTable("CareerNews").HasKey(x => x.Id);
              careerMapping.HasRequired(x=>x.CareerNewCate).WithMany().HasForeignKey(x=>x.CateId);
 
              var news_shop_map = modelBuilder.Entity<CareerNews_Shop_Mapping>().ToTable("CareerNews_Shop_Mapping").HasKey(x => x.Id);
@@ -44,7 +47,7 @@ namespace Job.Data
             modelBuilder.Entity<District>().ToTable("District").HasKey(x => x.Id).HasRequired(x=>x.StateProvice).WithMany().HasForeignKey(x=>x.StateProviceId);
             modelBuilder.Entity<StateProvice>().ToTable("StateProvice").HasKey(x => x.Id);
             modelBuilder.Entity<WorkedCompany>().ToTable("WorkedCompany").HasKey(x => x.Id);
-            modelBuilder.Entity<CareerNewCate>().ToTable("CareerNewCate").HasKey(x => x.Id);
+            modelBuilder.Entity<CareerNewCate>().ToTable("CareerNewCate").HasKey(x => x.Id).Ignore(x=>x.GroupName);
             var recuiment = modelBuilder.Entity<Recuitment>().ToTable("Recuitment").HasKey(x => x.Id);
             recuiment.HasRequired(x => x.Cate).WithMany().HasForeignKey(x => x.CateId);
             recuiment.HasRequired(x => x.DistrictModel).WithMany().HasForeignKey(x => x.DistrictId);

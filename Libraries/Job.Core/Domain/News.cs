@@ -28,5 +28,13 @@ namespace Job.Core.Domain
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public int CreateBy { get; set; }
         public int ViewCount { get; set; }
+        [Required(ErrorMessage= "Vui lòng chọn tỉnh thành")]
+        public int ProvinceId { get; set; }
+        public Nullable<int> DistrictId { get; set; }
+
+        public virtual StateProvice StateProvince { get; set; }
+        public virtual District District { get; set; }
+        public virtual User User { get; set; }
+      
     }
 }

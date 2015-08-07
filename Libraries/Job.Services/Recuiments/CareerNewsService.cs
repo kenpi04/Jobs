@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Job.Core.Domain;
+using PagedList;
 
 namespace Job.Services.Recuiments
 {
@@ -18,9 +19,20 @@ namespace Job.Services.Recuiments
 
           this._careerNewsRepository = careerNewsRepository;
       }
-        public PagedList.IPagedList<Core.Domain.CareerNews> GetAll(int pageIndex = 1, int pageSize = 20)
+      public IPagedList<Job.Core.Domain.CareerNews> GetAll(int groupid = 0, int stateId = 0, bool onlyHaveQuantity = false, bool includePriotyBox = false, int pageIndex = 1, int pageSize = 20)
         {
-            var q=_careerNewsRepository.Table.OrderBy(x=>x.Id);
+            var q=_careerNewsRepository.Table;
+            if (groupid != 0)
+                q = q.Where(x => x.CareerNewCate.GroupId == groupid);
+            if (onlyHaveQuantity)
+                q = q.Where(x => x.CareerNewsShop.Sum(y => y.Quantity) > 0);
+            if (includePriotyBox)
+                q = q.Where(x => x.IsHot);
+            if(stateId!=0)
+            {
+                q = q.Where(x => x.CareerNewsShop.Where(y => y.Shop.LocationId == stateId).Count()>0);
+            }
+            q=q.OrderBy(x=>x.Id);
             return new PagedList.PagedList<Core.Domain.CareerNews>(q, pageIndex, pageSize);
         }
 

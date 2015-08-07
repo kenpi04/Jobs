@@ -175,6 +175,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecuimentController.cs" />
@@ -188,9 +189,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Extentsion.cs" />
     <Compile Include="Helper\Htmlhelpers.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CareerNews\CareerNewsModel.cs" />
+    <Compile Include="Models\News\NewsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -200,11 +204,17 @@
     <Content Include="Content\Images\camera.jpg" />
     <Content Include="Content\Images\cd-top-arrow.svg" />
     <Content Include="Content\Images\file-attach.png" />
+    <Content Include="Content\Images\hightlight.png" />
+    <Content Include="Content\Images\logo_he4.png" />
+    <Content Include="Content\Images\news-highlight.png" />
+    <Content Include="Content\Images\next.png" />
+    <Content Include="Content\Images\prev.png" />
     <Content Include="Content\Images\tit-1.png" />
     <Content Include="Content\Images\tit-2.png" />
     <Content Include="Content\Images\tit-3.png" />
     <Content Include="Content\Images\tit-4.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\parallaxslider.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -267,6 +277,8 @@
     <Content Include="Areas\Admin\Views\News\CreateCareerNews.cshtml" />
     <Content Include="Areas\Admin\Views\Recuiment\List.cshtml" />
     <Content Include="Areas\Admin\Views\Recuiment\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\ListShop.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\CreateUpdateShop.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -611,13 +623,17 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.bxslider.min.js" />
+    <Content Include="Scripts\jquery.touchSwipe.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.velocity.min.js" />
     <Content Include="Scripts\jquery.webcam.js" />
     <Content Include="Scripts\jscam.swf" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\parallaxslider.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\uploadify\Change Log.txt" />
@@ -663,12 +679,20 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Recuiment\Post.cshtml" />
     <Content Include="Scripts\public.common.js" />
+    <Content Include="Views\Common\BannerSlider.cshtml" />
+    <Content Include="Views\Recuiment\CareerNewsHome.cshtml" />
+    <Content Include="Views\News\NewsHome.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\NewsDetail.cshtml" />
+    <Content Include="Views\Recuiment\Index.cshtml" />
+    <Content Include="Views\Recuiment\CareerListGroup.cshtml" />
+    <Content Include="Views\Recuiment\SlideBox.cshtml" />
+    <Content Include="Views\Recuiment\Detail.cshtml" />
+    <Content Include="Views\Recuiment\RelativeItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\Images\CV\" />
-    <Folder Include="Views\Common\" />
-    <Folder Include="Views\News\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

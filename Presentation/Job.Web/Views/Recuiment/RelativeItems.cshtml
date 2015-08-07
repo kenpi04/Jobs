@@ -1,0 +1,30 @@
+﻿@model List<Job.Web.Models.CareerNews.CareerNewsModel>
+    @{
+
+        Layout = null;
+    }
+    <div id="divRecruitmentRelated" runat="server">
+        <br>
+        <div class="box-title">
+            <div class="underline">
+                <h3>TUYỂN DỤNG LIÊN QUAN</h3>
+            </div>
+        </div>
+        <div class="box-list">
+            <ul class="list-item">
+                @foreach(var i in Model)
+                { 
+                <li class="item">
+                    <div class="grid-wrap">
+                        <div class="list-title"><a href="@Url.Action("Detail", new {id=i.Id })">@i.CateName</a></div>
+                        <span class="catalog"><i class="fa fa-briefcase"></i>&nbsp;@i.CateGroupName</span>
+                        <span class="catalog"><i class="fa fa-map-marker"></i>&nbsp;@i.StateList</span>
+                    </div>
+                </li>
+                }
+               
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+

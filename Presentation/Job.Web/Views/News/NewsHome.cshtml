@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Job.Web.Models.News.NewsModel>
+<div class="span18 news-highlight">
+    <div class="box-title-2">
+        <div>
+            <a href="/news">
+                <h3>TIN TỨC &amp; SỰ KIỆN</h3>
+                <img src="/Content/Images/news-highlight.png">
+            </a>
+        </div>
+    </div>
+
+    <div class="box-list">
+        <ul class="list-item col-3">
+            @foreach(var i in Model)
+            {
+                <li class="item">
+                    <div class="grid-wrap">
+                        <div class="thumbnail-2">
+                            <a href="/news?id=148">
+                                <img src="@Url.Content("~/Content/Images/"+i.ImgUrl)" width="200" />
+                            </a>
+                        </div>
+
+                        <div class="list-title">
+                            <a href="@Url.Action("NewsDetail", "News", new {id=i.Id })">[@(i.DistrictName!=""?i.DistrictName+" -":"")@i.StateName] @i.Title</a>
+                        </div>
+                        <span class="catalog"><i class="fa fa-clock-o" title="Thời gian"></i>&nbsp;@i.Time</span>
+                    </div>
+                </li>
+            }
+
+        </ul>
+        <div class="clear"></div>
+
+        <div class="more-item-2">
+            <a href="/news">XEM THÊM</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

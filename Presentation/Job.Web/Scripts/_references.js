@@ -252,3 +252,7 @@
 /// <reference path="public.common.js" />
 /// <reference path="jquery.webcam.js" />
 /// <reference path="webcandidate.js" />
+/// <reference path="parallaxslider.js" />
+/// <reference path="jquery.velocity.js" />
+/// <reference path="jquery.touchswipe.js" />
+/// <reference path="jquery.bxslider.js" />

@@ -1,0 +1,164 @@
+﻿@model Job.Core.Domain.CareerNews
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs">
+    <ul>
+        <li class="home">
+            <a href="/" title="Trở về trang chủ">Trang chủ</a>
+            <span>›</span>
+        </li>
+        <li class="category1">
+            <a href="/recruitment" title="Tuyển dụng">Tuyển dụng</a>
+            <span>›</span>
+        </li>
+        <li class="category2">
+            <strong>@Model.CareerNewCate.Name</strong>
+        </li>
+    </ul>
+</div>
+<div class="span8">
+    <div class="box-wrap job-wrap">
+        <div class="job-detail">
+            <div class="job-title">
+                <h3>@Model.CareerNewCate.Name</h3>
+            </div>
+
+            <div class="job-content">
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                <p>
+                                    @Html.Raw(Model.FullDes)
+                                </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="button">
+            <div class="submit">
+                <h3>
+                    <a href="@Url.Action("Post", new {id=Model.Id })">
+                        Ứng tuyển công việc này
+                    </a>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-wrap span10">
+      <!--Box comment-->
+    </div>
+
+    <div class="clear"></div>
+</div>
+<div class="span9">
+    <div class="box-wrap span12">
+
+        <div class="box-title">
+            <div class="underline">
+                <h3>THÔNG TIN TUYỂN DỤNG</h3>
+            </div>
+        </div>
+        <div class="box-list">
+            <div class="job-info">
+                <div class="list-group-item">
+                    <div class="item-icon">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-gold"></i>
+                            <i class="fa fa-usd fa-stack-1x"></i>
+                        </span>
+                    </div>
+                    <div class="item-content">
+                        <h3>Thu nhập:</h3>
+                        <p>@Model.Salary</p>
+                    </div>
+                </div>
+
+                <div class="list-group-item">
+                    <div class="item-icon">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-orange-light"></i>
+                            <i class="fa fa-quote-left fa-stack-1x"></i>
+                        </span>
+                    </div>
+                    <div class="item-content">
+                        <h3>Số lượng tuyển:</h3>
+                        <p>@Model.CareerNewsShop.Sum(x=>x.Quantity) nhân viên</p>
+                    </div>
+                </div>
+
+                <div class="list-group-item">
+                    <div class="item-icon">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-blue-light"></i>
+                            <i class="fa fa-map-marker fa-stack-1x"></i>
+                        </span>
+                    </div>
+                    <div class="item-content">
+                        <h3>Địa điểm làm việc:</h3>
+                        @foreach(var item in Model.CareerNewsShop)
+                        { 
+                        <p style="margin: 8px">
+                            • @item.Shop.ShopAddress
+                            <br>
+                            <span style="color: red">Hạn nộp: @item.EndDate.ToString("dd/MM/yyyy")</span>
+                        </p>
+                        }
+                      
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+       @Html.Action("RelativeItems", new {groupid=Model.CareerNewCate.GroupId,locationId=ViewBag.LocationId})
+
+        <div class="box-title">
+            <div class="underline">
+                <h3>CHIA SẺ CHO BẠN BÈ</h3>
+            </div>
+        </div>
+        <div class="box-list">
+            <div class="box-social">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://vieclam.thegioididong.com/recruitment?id=1632" class="facebook" target="_blank" title="Facebook"></a>
+                <a href="https://plus.google.com/share?url=https://vieclam.thegioididong.com/recruitment?id=1632" class="google-plus" target="_blank" title="Google Plus"></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <br>
+        <div class="box-title">
+            <div class="underline">
+                <h3>BẠN CHƯA TÌM ĐƯỢC VIỆC?</h3>
+            </div>
+        </div>
+        <div class="box-list">
+            <div class="form-request">
+                <p>
+                    Mời bạn để lại thông tin ứng tuyển.<br>
+                    Chúng tôi sẽ liên hệ khi có việc phù hợp.
+                </p>
+                <div class="more-item-2">
+                    <a href="/candidate">Gửi thông tin ứng tuyển</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>
+

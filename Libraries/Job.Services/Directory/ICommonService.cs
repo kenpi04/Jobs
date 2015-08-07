@@ -12,5 +12,11 @@ namespace Job.Services.Directory
       IList<StateProvice> GetAllStateProvince();
       IList<District> GetAllDistrictByStateId(int stateId);
       IList<Shop> GetAllShop(int stateId = 0);
+      void InsertShop(Shop entity);
+      void DeleteShop(Shop entity);
+      void UpdateShop(Shop entity);
+      Shop GetShopById(int id);
+
+      
     }
 }

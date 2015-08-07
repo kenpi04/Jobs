@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Job.Web.Helper;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,9 +19,15 @@
         <div id="fixinfo" style="position: fixed; right: 0; background: #fff; display: none"></div>
         <div id="main">
             @Html.Partial("_Header")
+            @if(ViewBag.isHome!=null)
+            { 
+            @Html.Action("BannerSlider", "Common")
+            }
             <div id="content">
                 <div class="container">
+                    <div class="row row-content">
                     @RenderBody()
+                        </div>
                 </div>
 
             </div>
@@ -35,5 +42,6 @@
 
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/Scripts/public.common.js")
+    @Html.PageScripts()
 </body>
 </html>

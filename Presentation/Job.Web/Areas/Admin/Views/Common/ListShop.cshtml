@@ -1,0 +1,48 @@
+﻿@model List<Job.Core.Domain.Shop>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Danh sách shop";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="well">
+    <ol class="breadcrumb">
+        <li><a href="/admin">Home</a></li>
+        <li class="active"><a href="#">Danh sách shop</a></li>
+    </ol>
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Danh sách shop</div>
+    <div class="panel-body">
+        <div class="pull-right">
+            <a href="@Url.Action("CreateUpdateShop")" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Tên</th>
+            <td>Địa chỉ</td>
+            <td>Số điện thoại</td>
+            <td>Tỉnh thành phố</td>
+            <td></td>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.Name</td>
+                <td>@i.ShopAddress</td>
+                <td>@i.PhoneNumber</td>
+                <td>@i.District.Name - @i.District.StateProvice.Name</td>
+                <td>
+                    <a href="@Url.Action("CreateUpdateShop", new { id = i.Id })"><span class="glyphicon glyphicon-edit">Sửa</span></a> |
+                    @*<a data-id="@i.Id" href="#" onclick="deleteNews(@i.Id)" class="delete"><span class="glyphicon glyphicon-remove">Xóa</span></a>*@
+                </td>
+            </tr>
+        }
+    </table>
+</div>

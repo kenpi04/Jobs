@@ -1,0 +1,61 @@
+﻿@model Job.Core.Domain.Shop
+@{
+    ViewBag.Title = "Thêm/Cập nhật shop";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string StateId = "";
+    if (ViewBag.StateId)
+    {
+        StateId = ViewBag.StateId;
+    }
+       
+}
+
+@using (Html.BeginForm("CreateUpdateShop", "Common", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmUpdateShop" }))
+{
+
+    @Html.HiddenFor(x => x.Id)
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tên</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Địa chỉ</label>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.ShopAddress)
+            @Html.ValidationMessageFor(m => m.ShopAddress)
+        </div>
+    </div>
+       <div class="form-group">
+        <label class="col-md-2 control-label">Điện thoại</label>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.PhoneNumber)
+            @Html.ValidationMessageFor(m => m.PhoneNumber)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tỉnh thành</label>
+        <div class="col-md-10">
+            @Html.DropDownList("State", new SelectList((ViewBag.StateList as Dictionary<int, string>), "Key", "Value",StateId))
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Quận/Huyện</label>
+        <div class="col-md-10">
+            <select name="DistrictId" id="ddlDistrictId" data-val="@Model.LocationId">
+                <option>Chọn Quận huyện</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Cập nhật" />
+        </div>
+    </div>
+
+}
+
+
+

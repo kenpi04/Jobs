@@ -1,13 +1,14 @@
 ﻿@using Job.Web.Helper
 @using(Html.BeginScripts())
 {
-    @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.min.js")
+    @Scripts.Render("~/Scripts/uploadify/jquery.uploadify.js")
 @Styles.Render("~/Scripts/uploadify/uploadify.css")
 <script type="text/javascript">
     $(function () {
         $('#upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")').uploadify({
             'swf': '@Url.Content("~/Scripts/uploadify/uploadify.swf")',
             'uploader': '/Common/UploaPicture',
+            'buttonImageURL':null,
             'multi': false,
             'method': 'post',
             'buttonText': 'CHỌN ẢNH ĐĂNG...',

@@ -18,5 +18,6 @@ namespace Job.Core.Domain
         public string PhoneNumber { get; set; }
         public int LocationId { get; set; }
         public virtual  District  District { get; set; }
+        public string Name { get; set; }
     }
 }

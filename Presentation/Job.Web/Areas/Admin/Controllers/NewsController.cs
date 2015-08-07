@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Job.Services.Recuiments;
 using Job.Services.Directory;
 using System.Globalization;
+using Job.Web.Helper;
 
 namespace Job.Web.Areas.Admin.Controllers
 {
@@ -47,6 +48,7 @@ namespace Job.Web.Areas.Admin.Controllers
                 if (news == null)
                     return RedirectToAction("List");
             }
+            ViewBag.StateList = _commonService.GetAllStateProvince().ToDictionary(x => x.Id, x => x.Name);
             return View(news);
         }
 
@@ -56,6 +58,7 @@ namespace Job.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.ShortDes = model.FullDescription.StripTagsRegex();
                 if (model.Id == 0)
                 {
                     model.UpdateDate = DateTime.Now;
@@ -105,7 +108,7 @@ namespace Job.Web.Areas.Admin.Controllers
                 if (news == null)
                     return RedirectToAction("CareerNewsList");
             }
-            ViewBag.CateList = _careerNewsService.GetAllCareerNewsCate().Select(x => new { x.Id, x.Name });
+            ViewBag.CateList = _careerNewsService.GetAllCareerNewsCate().Select(x => new { x.Id, x.Name,x.GroupName });
             ViewBag.ShopList = _commonService.GetAllShop();
             return View(news);
         }
@@ -157,7 +160,7 @@ namespace Job.Web.Areas.Admin.Controllers
             else
             {
                 var b = _careerNewsService.GetById(model.Id);
-                b.Title = model.Title;
+               
                 b.FullDes = model.FullDes;
                 b.Salary = model.Salary;
                 

@@ -1,7 +1,7 @@
 ﻿@model Job.Core.Domain.News
 
 
-@using (Html.BeginForm("Create", "News", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Create", "News", FormMethod.Post, new { @class = "form-horizontal", role = "form",id="frmCreateNews" }))
 {
     
     @Html.HiddenFor(x => x.Id)
@@ -13,10 +13,25 @@
         </div>
     </div>
      <div class="form-group">
-        <label class="col-md-2 control-label">Nội dung</label>
+        <label class="col-md-2 control-label">Mô tả chi tiết</label>
         <div class="col-md-10">
             @Html.EditorFor(m => m.FullDescription,"CKEditor")
             @Html.ValidationMessageFor(m => m.FullDescription)
+        </div>
+    </div>
+     <div class="form-group">
+        <label class="col-md-2 control-label">Tỉnh thành</label>
+        <div class="col-md-10">
+          @Html.DropDownListFor(x => x.StateProvince, new SelectList((ViewBag.StateList as Dictionary<int, string>), "Key", "Value", Model.ProvinceId))
+            @Html.ValidationMessageFor(m => m.ProvinceId)
+        </div>
+    </div>
+     <div class="form-group">
+        <label class="col-md-2 control-label">Quận/Huyện</label>
+        <div class="col-md-10">
+         <select name="DistrictId" id="ddlDistrictId" data-val="@Model.DistrictId">
+           <option>Chọn Quận huyện</option>
+         </select>
         </div>
     </div>
       <div class="form-group">

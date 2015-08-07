@@ -1,0 +1,74 @@
+﻿@model Job.Web.Models.News.NewsModel
+@{
+    ViewBag.Title = "NewsDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs">
+    <ul>
+        <li class="home">
+            <a href="/" title="Trở về trang chủ">Trang chủ</a>
+            <span>›</span>
+        </li>
+        <li class="category1">
+            <a href="/news" title="Tin tức tuyển dụng">Tin tức tuyển dụng</a>
+            <span>›</span>
+        </li>
+        <li class="category2">
+            <strong>[@(Model.DistrictName != "" ? Model.DistrictName + " -" : "")@Model.StateName] @Model.Title</strong>
+        </li>
+    </ul>
+</div>
+<div class="span8">
+    <div class="box-wrap">
+        <div class="box-list">
+            <div class="blog-wrapper try-wrapper-detail">
+                <div class="blog-title try-title-detail">
+                    <h2>
+                        [@(Model.DistrictName != "" ? Model.DistrictName + " -" : "")@Model.StateName] @Model.Title
+                    </h2>
+                </div>
+                <div class="blog-content">
+                    <img class="thumbnail" src="@Url.Content("~/Content/Images/"+Model.ImgUrl)"/>
+                    .
+                </div>
+                <div class="blog-content" style="margin-top: 20px">
+                 
+                    @Html.Raw(Model.ShortDes)
+                </div>
+            </div>
+            <div style="padding: 10px 0">
+                <div style="float: left; font-size: 90%">
+                  @Model.PostBy <span class="separator">·</span> 
+                  @Model.Time
+                   <span class="separator">·</span> @Model.ViewCount lượt xem
+                </div>
+                <div style="float: right; width: 280px; text-align: right">
+                   
+                  
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-wrap span10">
+        <div class="box-title">
+            <div class="underline">
+                <h3>THẢO LUẬN</h3>
+            </div>
+        </div>
+        <div class="box-list">
+
+
+            <div style="width: 96%">
+               
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+

@@ -1,0 +1,86 @@
+﻿@model PagedList.PagedList<Job.Web.Models.News.NewsModel>
+ @using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs">
+    <ul>
+        <li class="home">
+            <a href="/" title="Trở về trang chủ">Trang chủ</a>
+            <span>›</span>
+        </li>
+        <li class="category1">
+            <strong>Tin tức tuyển dụng</strong>
+        </li>
+    </ul>
+</div>
+<div class="span13">
+    <div class="box-wrap">
+
+        <div class="box-title" style="position: relative">
+            <div class="underline">
+                <h3>TIN TỨC TUYỂN DỤNG</h3>
+            </div>
+        </div>
+
+        <div class="box-list">
+            <div>
+                <div class="box-list">
+                    <ul class="list-item ">
+                        @foreach(var i in Model)
+                        { 
+                        <li class="item">
+                            <div class="blog-wrapper">
+                                <div class="blog-title">
+                                    <h2>
+                                        <a href="@Url.Action("NewsDetail", new {id=i.Id })">
+                                            [@i.StateName] - @i.Title
+                                        </a>
+                                    </h2>
+                                </div>
+                                <div class="blog-detail">
+                                    <span class="blog-detail-date">
+                                        <i class="fa fa-eye"></i>&nbsp;@i.ViewCount
+                                    </span>
+
+                                    <span class="blog-detail-date">
+                                        <i class="fa fa-clock-o"></i>&nbsp;@i.Time
+                                    </span>
+
+                                    <span class="blog-detail-user">
+                                        <i class="fa fa-user"></i>&nbsp;Đăng bởi @i.PostBy
+                                    </span>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="thumbnail">
+                                        <img src="@Url.Content("~/Content/images/"+i.ImgUrl)">
+                                    </div>
+                                    <i>
+                                        <p>
+
+                                           @i.ShortDes
+                                        </p>
+                                    </i>
+                                   
+
+                                    <a class="blog-read-more" href="@Url.Action("Newsdetail", new { id=i.Id})">Xem thêm</a>
+                                </div>
+                            </div>
+                        </li>
+                        }
+                       
+                    </ul>
+                    <div class="pager">
+                        <nav>
+                            @Html.PagedListPager(Model,p=>string.Format("page={0}",p))
+                        </nav>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

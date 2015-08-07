@@ -16,7 +16,7 @@ namespace Job.Web.Controllers
         }
         public ActionResult Index()
         {
-            _userService.GetUserByUserName("admin");
+            ViewBag.isHome = true;
             return View();
         }
 
