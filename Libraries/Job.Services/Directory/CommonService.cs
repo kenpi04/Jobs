@@ -53,14 +53,14 @@ namespace Job.Services.Directory
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity is null");
-            _shopRepository.Update(entity);
+            _shopRepository.Delete(entity);
         }
 
         public void UpdateShop(Shop entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("Entity is null");
-            _shopRepository.Delete(entity);
+            _shopRepository.Update(entity);
         }
 
 

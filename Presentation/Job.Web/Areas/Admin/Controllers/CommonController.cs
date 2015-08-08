@@ -28,9 +28,10 @@ namespace Job.Web.Areas.Admin.Controllers
             if (id != 0)
             {
                 model = _commonService.GetShopById(id);
-                ViewBag.StateId = model.District.StateProvice.Id;
+                if(model.District!=null)
+                    ViewBag.StateId = model.District.StateProvice.Id;
             }
-            ViewBag.StateList = _commonService.GetAllStateProvince();
+            ViewBag.StateList = _commonService.GetAllStateProvince().ToDictionary(x=>x.Id,x=>x.Name);
             return View(model);
         }
         [HttpPost]
@@ -51,12 +52,14 @@ namespace Job.Web.Areas.Admin.Controllers
                     shop.PhoneNumber = model.PhoneNumber;
                     _commonService.UpdateShop(shop);
                 }
-                return RedirectToAction("Index");
+                ViewData["mgs"] = "Cập nhật thành công";
+                return RedirectToAction("ListShop");
             }
             ViewBag.Error = "Cập nhật không thành công";
             return View(model);
 
             
         }
+
 	}
 }

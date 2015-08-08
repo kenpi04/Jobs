@@ -26,6 +26,12 @@ namespace Job.Web
               namespaces: new[] { "Job.Web.Controllers" }
           );
             routes.MapRoute(
+             name: "Recruiment",
+             url: "recruitment",
+             defaults: new { controller = "Recuiment", action = "index", page = UrlParameter.Optional },
+             namespaces: new[] { "Job.Web.Controllers" }
+         );
+            routes.MapRoute(
           name: "newsdetail",
           url: "news-detail/{id}",
           defaults: new { controller = "news", action = "newsDetail"},

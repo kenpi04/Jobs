@@ -1,61 +1,81 @@
 ﻿@model Job.Core.Domain.Shop
+@using Job.Web.Helper;
 @{
     ViewBag.Title = "Thêm/Cập nhật shop";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     string StateId = "";
-    if (ViewBag.StateId)
+    if (ViewBag.StateId != null)
     {
-        StateId = ViewBag.StateId;
+        StateId = ViewBag.StateId.ToString();
     }
-       
-}
 
-@using (Html.BeginForm("CreateUpdateShop", "Common", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmUpdateShop" }))
+}
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Đăng tin</div>
+    <div class="panel-body">
+    
+            @using (Html.BeginForm("CreateUpdateShop", "Common", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmUpdateShop" }))
+            {
+
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Tên</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Địa chỉ</label>
+                    <div class="col-md-4">
+                        @Html.TextAreaFor(m => m.ShopAddress, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ShopAddress)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Điện thoại</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Tỉnh thành</label>
+                    <div class="col-md-4">
+                        @Html.DropDownList("State", new SelectList((ViewBag.StateList as Dictionary<int, string>), "Key", "Value"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Quận/Huyện</label>
+                    <div class="col-md-4">
+                        <select name="LocationId" id="ddlDistrictId" data-val="@Model.LocationId" class="form-control">
+                            <option>Chọn Quận huyện</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-primary" value="Cập nhật" />
+                    </div>
+                </div>
+
+            }
+      
+
+        </div>
+    </div>
+
+@if(Model.Id>0)
 {
-
-    @Html.HiddenFor(x => x.Id)
-    <div class="form-group">
-        <label class="col-md-2 control-label">Tên</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Name)
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Địa chỉ</label>
-        <div class="col-md-10">
-            @Html.EditorFor(m => m.ShopAddress)
-            @Html.ValidationMessageFor(m => m.ShopAddress)
-        </div>
-    </div>
-       <div class="form-group">
-        <label class="col-md-2 control-label">Điện thoại</label>
-        <div class="col-md-10">
-            @Html.EditorFor(m => m.PhoneNumber)
-            @Html.ValidationMessageFor(m => m.PhoneNumber)
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Tỉnh thành</label>
-        <div class="col-md-10">
-            @Html.DropDownList("State", new SelectList((ViewBag.StateList as Dictionary<int, string>), "Key", "Value",StateId))
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Quận/Huyện</label>
-        <div class="col-md-10">
-            <select name="DistrictId" id="ddlDistrictId" data-val="@Model.LocationId">
-                <option>Chọn Quận huyện</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Cập nhật" />
-        </div>
-    </div>
-
+    using(Html.BeginScripts())
+    {
+        <script>
+            $(function () {
+                $("#State").val(@StateId);
+                $("#State").change();
+            })
+        </script>
+    }
+    
 }
-
-
-

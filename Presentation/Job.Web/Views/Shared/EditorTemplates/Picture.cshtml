@@ -5,10 +5,12 @@
 @Styles.Render("~/Scripts/uploadify/uploadify.css")
 <script type="text/javascript">
     $(function () {
+        
+
         $('#upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")').uploadify({
             'swf': '@Url.Content("~/Scripts/uploadify/uploadify.swf")',
-            'uploader': '/Common/UploaPicture',
-            'buttonImageURL':null,
+            'uploader': '/Common/UploadPicture',
+            'fileTypeExts': '*.gif; *.jpg; *.png; *.jpeg',
             'multi': false,
             'method': 'post',
             'buttonText': 'CHỌN ẢNH ĐĂNG...',
@@ -22,6 +24,7 @@
             
             'onSelect': function (file) {
                 flag_error = 1;
+               
             },
             'onUploadStart': function (file) {
                 if (file == null || file.name == '') {
@@ -32,9 +35,9 @@
             },
             'onUploadSuccess': function (file, data, response) {
                 var obj = JSON.parse(data);
-                $("#upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")").val(data.name);
-                $("#img_@ViewData.TemplateInfo.GetFullHtmlFieldId("")").attr("src", data.link);
-
+                $("#@ViewData.TemplateInfo.GetFullHtmlFieldId("")").val(obj.name);
+                $("#img_@ViewData.TemplateInfo.GetFullHtmlFieldId("")").attr("src", obj.link);
+                
                 //pictureids.push(obj.id);
             },
             'onQueueComplete': function (queueData) {
@@ -46,6 +49,6 @@
     })
 </script>
 }
-
-<input type="hidden" name="@ViewData.TemplateInfo.GetFullHtmlFieldName("")" id="upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")" />
+<input type="file" id="upload_@ViewData.TemplateInfo.GetFullHtmlFieldId("")" value="@ViewData[ViewData.TemplateInfo.GetFullHtmlFieldName("")]" />
+<input type="hidden" id="@ViewData.TemplateInfo.GetFullHtmlFieldId("")" name="@ViewData.TemplateInfo.GetFullHtmlFieldName("")" />
 <img id="img_@ViewData.TemplateInfo.GetFullHtmlFieldId("")"/>

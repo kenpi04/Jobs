@@ -54,7 +54,7 @@ namespace Job.Web.Controllers
         }
         public ActionResult CareerListGroup(int groupId)
         {
-            var list = _careerNewService.GetAll(groupid: groupId,onlyHaveQuantity:true).Select(x => PrepairingCareerNews(x));
+            var list = _careerNewService.GetAll(groupid: groupId,onlyHaveQuantity:true).Select(x => PrepairingCareerNews(x)).ToList();
             return View(list);
         }
         public ActionResult Post()
@@ -85,7 +85,7 @@ namespace Job.Web.Controllers
             {
                 var file = files[0];
                 string fileName = string.Format("{0}_{1}", DateTime.Now.ToString("ddMMyyyyhhmmss"), file.FileName);
-                string savePath = Server.MapPath("~/Content/Images/CV/" + fileName);
+                string savePath = Server.MapPath("~/Content/CV/" + fileName);
                 file.SaveAs(savePath);
                 return fileName;
             }

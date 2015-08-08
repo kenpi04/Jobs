@@ -1,4 +1,4 @@
-﻿@model PagedList.PagedList<Job.Web.Models.News.NewsModel>
+﻿@model PagedList.StaticPagedList<Job.Web.Models.News.NewsModel>
  @using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
@@ -41,25 +41,25 @@
                                 </div>
                                 <div class="blog-detail">
                                     <span class="blog-detail-date">
-                                        <i class="fa fa-eye"></i>&nbsp;@i.ViewCount
+                                        <i class="glyphicon glyphicon-eye-open"></i>&nbsp;@i.ViewCount
                                     </span>
 
                                     <span class="blog-detail-date">
-                                        <i class="fa fa-clock-o"></i>&nbsp;@i.Time
+                                        <i class="glyphicon glyphicon-time"></i>&nbsp;@i.Time
                                     </span>
 
                                     <span class="blog-detail-user">
-                                        <i class="fa fa-user"></i>&nbsp;Đăng bởi @i.PostBy
+                                        <i class="glyphicon glyphicon-user"></i>&nbsp;Đăng bởi @i.PostBy
                                     </span>
                                 </div>
                                 <div class="blog-content">
                                     <div class="thumbnail">
-                                        <img src="@Url.Content("~/Content/images/"+i.ImgUrl)">
+                                        <img src="@Url.Content("~/Content/imagefile/"+i.ImgUrl)">
                                     </div>
                                     <i>
                                         <p>
 
-                                           @i.ShortDes
+                                           @Html.Raw(i.ShortDes)
                                         </p>
                                     </i>
                                    

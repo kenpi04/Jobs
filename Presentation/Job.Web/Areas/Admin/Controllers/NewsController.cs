@@ -10,7 +10,7 @@ using Job.Services.Recuiments;
 using Job.Services.Directory;
 using System.Globalization;
 using Job.Web.Helper;
-
+using Job.Web.Helper;
 namespace Job.Web.Areas.Admin.Controllers
 {
     [Authorize]
@@ -58,6 +58,7 @@ namespace Job.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                string imageName = "";
                 model.ShortDes = model.FullDescription.StripTagsRegex();
                 if (model.Id == 0)
                 {
@@ -65,6 +66,11 @@ namespace Job.Web.Areas.Admin.Controllers
                     model.ViewCount = 0;
                     model.CreateBy = _workContext.CurrentUser.Id;
                     model.CreateDate = DateTime.Now;
+                    if (model.Image != null)
+                    {
+                        model.Image = Extentsion.RenameFile(Server.MapPath("~/Content/ImageFile/"), model.Image);
+                    }
+                    
                     _newsService.Insert(model);
 
                 }
@@ -75,6 +81,11 @@ namespace Job.Web.Areas.Admin.Controllers
                     {
                         news.Title = model.Title;
                         news.FullDescription = model.FullDescription;
+                        if(news.Image!=model.Image)
+                        {
+                            news.Image = Extentsion.RenameFile(Server.MapPath("~/Content/ImageFile/"), model.Image);
+                           
+                        }
                         news.Image = model.Image;
                         news.UpdateDate = DateTime.Now;
                         _newsService.Update(news);
@@ -82,6 +93,7 @@ namespace Job.Web.Areas.Admin.Controllers
                 }
                 return RedirectToAction("list");
             }
+            ViewBag.StateList = _commonService.GetAllStateProvince().ToDictionary(x => x.Id, x => x.Name);
             ViewBag.Error = "Thêm không thành công";
             return View(model);
         }

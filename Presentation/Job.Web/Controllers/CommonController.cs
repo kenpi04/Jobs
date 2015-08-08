@@ -24,7 +24,7 @@ namespace Job.Web.Controllers
         [HttpPost]
         public ActionResult UploadPicture(HttpPostedFileBase Filedata)
         {
-            string PathImage=Server.MapPath("~/Content/Images");
+            string PathImage=Server.MapPath("~/Content/ImageFile");
 
            
             var fileName = "";
@@ -36,12 +36,12 @@ namespace Job.Web.Controllers
                     throw new ArgumentException("No file uploaded");
                 string ext = Path.GetExtension(httpPostedFile.FileName);
                  fileName=Guid.NewGuid().ToString()+ext;
-                httpPostedFile.SaveAs(Path.Combine(PathImage));
+                httpPostedFile.SaveAs(Path.Combine(PathImage,fileName));
 
 
                 return Json(new { 
                 name=fileName,
-                link="~/Content/Images/"+fileName
+                link=Url.Content("~/Content/ImageFile/"+fileName)
                 });
             }
             return Json("");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -85,6 +86,22 @@ namespace Job.Web.Helper
         public static string StripTagsRegex(this string source)
         {
             return Regex.Replace(source, "<.*?>", string.Empty);
+        }
+        public static string RenameFile(string directory,string fileName)
+        {
+            string oldPath = Path.Combine(directory, fileName);
+            string newFileName = string.Format("0000_{0}", fileName);
+            string newPath = Path.Combine(directory, newFileName);
+            try
+            {
+              
+                File.Move(oldPath, newPath);
+                File.Delete(oldPath);
+                return newFileName;
+            }catch
+            {
+                return fileName;
+            }
         }
     }
 }

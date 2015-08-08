@@ -279,6 +279,7 @@
     <Content Include="Areas\Admin\Views\Recuiment\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Common\ListShop.cshtml" />
     <Content Include="Areas\Admin\Views\Common\CreateUpdateShop.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -692,7 +693,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\Images\CV\" />
+    <Folder Include="Content\CV\" />
+    <Folder Include="Content\ImageFile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
