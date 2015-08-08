@@ -9,7 +9,7 @@ namespace Job.Core.Domain
    public class BaseEntityModel
     {
        public BaseEntityModel()
-       {
+       { 
            this.CustomProperties = new Dictionary<string, object>();
        }
        public int Id { get; set; }
