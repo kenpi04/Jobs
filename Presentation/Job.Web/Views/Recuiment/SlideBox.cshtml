@@ -3,45 +3,16 @@
     Layout = null;
 }
 @using Job.Web.Helper;
-@if(Model.Count>0)
-{ 
-using(Html.BeginScripts())
+@if (Model.Count > 0)
 {
-    
-<script src="~/Scripts/jquery.bxslider.min.js"></script>
-            <script src="~/Scripts/jquery.touchSwipe.min.js"></script>
-    <script>
+    using (Html.BeginScripts())
+    {
 
-
-    //$.noConflict();
-    jQuery(document).ready(function ($) {
-        jQuery('.slider2').bxSlider({
-            slideWidth: 210,
-            minSlides: 2,
-            maxSlides: 3,
-            slideMargin: 10,
-            nextSelector: '#slider-next',
-            prevSelector: '#slider-prev',
-            nextText: '›',
-            prevText: '‹',
-            pager: false,
-            auto: true,
-        });
-    });
-
-    </script>
-}
-<div class="box-title" style="position: relative">
-    <div class="underline">
-        <h3>ĐANG TUYỂN GẤP</h3>
-        <div class="outside" style="position: absolute; right: 0; top: 0;">
-            <p><span id="slider-next"><a class="bx-next" href="">›</a></span></p>
-        </div>
-    </div>
-</div>
-<div class="box-list">
-    <div class="box-quickslider">
+        <script src="~/Scripts/jquery.bxslider.min.js"></script>
+        <script src="~/Scripts/jquery.touchSwipe.min.js"></script>
         <script>
+
+
             //$.noConflict();
             jQuery(document).ready(function ($) {
                 jQuery('.slider2').bxSlider({
@@ -57,27 +28,63 @@ using(Html.BeginScripts())
                     auto: true,
                 });
             });
-        </script>
-        <div class="bx-wrapper">
-           <div class="slider2">
-               @foreach(var item in Model)
-               {
-                   <div class="slide bx-clone">
-                                                    <div class="slide-image">
-                                                        <img src="@Url.Content("~/Content/Images/"+item.ImgUrl)">
-                                                    </div>
-                                                    <div class="local">
-                                                        <div><i class="fa fa-map-marker"></i>&nbsp;<strong>@item.StateList</strong></div>
-                                                    </div>
-                                                    <div class="list-title"><a href="@Url.Action("Detail","Recuitment")" title="@item.CateName">@item.CateName</a></div>
-                                                    <span class="catalog">@item.CateGroupName</span>
-                                                </div>
-                   
-               }
 
-           </div>
+        </script>
+    }
+    <div class="box-title" style="position: relative">
+        <div class="underline">
+            <h3>ĐANG TUYỂN GẤP</h3>
+            <div class="outside" style="position: absolute; right: 0; top: 0;">
+                <p><span id="slider-next"><a class="bx-next" href="">›</a></span></p>
+            </div>
         </div>
     </div>
-</div>
+    <div class="box-list">
+        <div class="box-quickslider">
+            <script>
+                //$.noConflict();
+                jQuery(document).ready(function ($) {
+                    jQuery('.slider2').bxSlider({
+                        slideWidth: 210,
+                        minSlides: 2,
+                        maxSlides: 3,
+                        slideMargin: 10,
+                        nextSelector: '#slider-next',
+                        prevSelector: '#slider-prev',
+                        nextText: '›',
+                        prevText: '‹',
+                        pager: false,
+                        auto: true,
+                    });
+                });
+            </script>
+            <div class="bx-wrapper">
+                <div class="slider2">
+                    @foreach (var item in Model)
+                    {
+                        <div class="slide bx-clone">
+                            <div class="slide-image">
+                                @if (!string.IsNullOrEmpty(item.ImgUrl))
+                                {
+                                    <img src="@Url.Content("~/Content/ImageFile/"+item.ImgUrl)">
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Content/ImageFile/placeholder.png")" style="width:120px" />
+                                }
+                            </div>
+                            <div class="local">
+                                <div><i class="fa fa-map-marker"></i>&nbsp;<strong>@item.StateList</strong></div>
+                            </div>
+                            <div class="list-title"><a href="@Url.Action("Detail", "Recuiment", new {id=item.Id })" title="@item.CateName">@item.CateName</a></div>
+                            <span class="catalog">@item.CateGroupName</span>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 }

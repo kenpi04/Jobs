@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Post";
+    ViewBag.Title = "Ứng tuyển";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <canvas id="imgdisplayHide" style="display: none;"></canvas>
@@ -60,12 +60,12 @@
                                         <div><b>Vị trí ứng tuyển:</b></div>
                                     </td>
                                     <td style="width: 500px">
-                                        <select id="ddlRecruitmentPosition" class="selectbox required123456" style="width: 324px; min-height: inherit">
+                                        <select id="ddlRecruitmentPosition" class="selectbox required123456" style="width: 324px; min-height: inherit" @(ViewBag.CateId != 0 ? "disabled" : "")>
                                             <option selected="selected" value="">Chọn Vị trí ứng tuyển</option>
-                                           @foreach(var i in (ViewBag.CateList as Dictionary<int,string>))
-                                           {
-                                               <option value="@i.Key">@i.Value</option>
-                                           }
+                                            @foreach (var i in (ViewBag.CateList as Dictionary<int, string>))
+                                            {
+                                                <option @(ViewBag.CateId == i.Key ? "selected=selected" : "") value="@i.Key">@i.Value</option>
+                                            }
                                         </select>
 
                                         <span style="color: red; visibility: visible;">(*)</span>

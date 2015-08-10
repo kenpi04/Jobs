@@ -175,6 +175,7 @@ namespace Job.Web.Areas.Admin.Controllers
                
                 b.FullDes = model.FullDes;
                 b.Salary = model.Salary;
+                b.Title = model.Title;
                 
                 var listShopDelete=b.CareerNewsShop.Where(x=>!listShopId.Contains(x.Id));
                 foreach(var i in listShopDelete)

@@ -41,7 +41,9 @@ namespace Job.Web.Controllers
             var item = _careerNewService.GetById(id);
             if (item == null)
                 return RedirectToRoute("HomePage");
-            ViewBag.LocationId = item.CareerNewsShop.FirstOrDefault().Shop.LocationId;
+         //   if (item.CareerNewsShop.FirstOrDefault()!=null)
+               //  ViewBag.LocationId = item.CareerNewsShop.FirstOrDefault().Shop.LocationId;
+         //   if(item.CareerNewsShop.)
             return View(item);
 
         }
@@ -57,8 +59,9 @@ namespace Job.Web.Controllers
             var list = _careerNewService.GetAll(groupid: groupId,onlyHaveQuantity:true).Select(x => PrepairingCareerNews(x)).ToList();
             return View(list);
         }
-        public ActionResult Post()
+        public ActionResult Post(int id=0)
         {
+            ViewBag.CateId = id;
             var model = new Recuitment();
             ViewBag.CateList = _careerNewService.GetAllCareerNewsCate().ToDictionary(x => x.Id, x => x.Name);
             ViewBag.StateList = _commonService.GetAllStateProvince().ToDictionary(x => x.Id, x => x.Name);

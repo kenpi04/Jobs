@@ -10,8 +10,13 @@
         <li class="item" style="height:280px">
             <div class="grid-wrap">
                 <div class="thumbnail-2">
-                    <a href="/recruitment?id=1632">
-                        <img src="@Url.Content("~/Content/Images/"+item.ImgUrl)"/>
+                    <a href="@Url.Action("RecuitmentDetail","Recuiment" ,new {id=item.Id })">
+                        @if (!string.IsNullOrEmpty(item.ImgUrl))
+                        {
+                            <img src="@Url.Content("~/Content/ImageFile/"+item.ImgUrl)" width="200" />
+                        }
+                        else
+                        { <img src="@Url.Content("~/Content/ImageFile/placeholder.png")" style="width:160px" /> }
                     </a>
                 </div>
                 <div class="list-title"><a href="@Url.Action("RecuitmentDetail","Recuiment" ,new {id=item.Id })">@item.CateName (@item.Quantity)</a></div>

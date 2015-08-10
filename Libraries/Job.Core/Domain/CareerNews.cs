@@ -16,6 +16,8 @@ namespace Job.Core.Domain
        }      
        [Required(ErrorMessage="Chọn vị trí tuyển dụng")]      
         public int CateId { get; set; }
+       [Required(ErrorMessage="Nhập tiêu đề")]
+       public string Title { get; set; }
        [Required(ErrorMessage="Nhập nội dung")]
        [AllowHtml]
         public string FullDes { get; set; }

@@ -16,8 +16,13 @@
                 <li class="item">
                     <div class="grid-wrap">
                         <div class="thumbnail-2">
-                            <a href="/news?id=148">
-                                <img src="@Url.Content("~/Content/Images/"+i.ImgUrl)" width="200" />
+                            <a href="@Url.Action("NewsDetail", "News", new {id=i.Id })">
+                                @if (!string.IsNullOrEmpty(i.ImgUrl))
+                                {
+                                    <img src="@Url.Content("~/Content/ImageFile/"+i.ImgUrl)" width="200" />
+                                }
+                                else
+                                { <img src="@Url.Content("~/Content/ImageFile/placeholder.png")" style="width:160px" /> }
                             </a>
                         </div>
 

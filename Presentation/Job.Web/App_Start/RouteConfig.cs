@@ -34,16 +34,28 @@ namespace Job.Web
             routes.MapRoute(
           name: "newsdetail",
           url: "news-detail/{id}",
-          defaults: new { controller = "news", action = "newsDetail"},
+          defaults: new { controller = "news", action = "newsDetail" },
           namespaces: new[] { "Job.Web.Controllers" }
       );
+            routes.MapRoute(
+    name: "Candidate",
+    url: "Candidate",
+    defaults: new { controller = "Recuiment", action = "Post" },
+    namespaces: new[] { "Job.Web.Controllers" }
+);
+            routes.MapRoute(
+   name: "RecuitmentDetail",
+   url: "recuitment-{id}",
+   defaults: new { controller = "Recuiment", action = "Detail" },
+   namespaces: new[] { "Job.Web.Controllers" }
+);
 
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces:new[]{"Job.Web.Controllers"}
+                namespaces: new[] { "Job.Web.Controllers" }
             );
         }
     }

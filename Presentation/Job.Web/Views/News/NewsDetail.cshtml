@@ -1,6 +1,6 @@
 ﻿@model Job.Web.Models.News.NewsModel
 @{
-    ViewBag.Title = "NewsDetail";
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,7 +29,7 @@
                     </h2>
                 </div>
                 <div class="blog-content">
-                    <img class="thumbnail" src="@Url.Content("~/Content/Images/"+Model.ImgUrl)"/>
+                    <img class="thumbnail" src="@Url.Content("~/Content/ImageFile/"+Model.ImgUrl)"/>
                     .
                 </div>
                 <div class="blog-content" style="margin-top: 20px">

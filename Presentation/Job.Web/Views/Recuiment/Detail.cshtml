@@ -1,6 +1,6 @@
 ﻿@model Job.Core.Domain.CareerNews
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -47,7 +47,7 @@
         <div class="button">
             <div class="submit">
                 <h3>
-                    <a href="@Url.Action("Post", new {id=Model.Id })">
+                    <a href="@Url.Action("Post", new {id=Model.CateId })">
                         Ứng tuyển công việc này
                     </a>
                 </h3>
@@ -76,11 +76,21 @@
                         <span class="fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x fa-gold"></i>
                             <i class="fa fa-usd fa-stack-1x"></i>
+                           
                         </span>
                     </div>
                     <div class="item-content">
                         <h3>Thu nhập:</h3>
-                        <p>@Model.Salary</p>
+                        <p>
+                            @if(Model.Salary==0)
+                            {
+                                @("Thương lượng")
+                            }
+                            else
+                            { 
+                            @Model.Salary
+                            }
+                        </p>
                     </div>
                 </div>
 
@@ -123,7 +133,7 @@
             <div class="clear"></div>
         </div>
 
-       @Html.Action("RelativeItems", new {groupid=Model.CareerNewCate.GroupId,locationId=ViewBag.LocationId})
+       @*@Html.Action("RelativeItems", new {groupid=Model.CareerNewCate.GroupId,locationId=ViewBag.LocationId})*@
 
         <div class="box-title">
             <div class="underline">
@@ -132,8 +142,8 @@
         </div>
         <div class="box-list">
             <div class="box-social">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://vieclam.thegioididong.com/recruitment?id=1632" class="facebook" target="_blank" title="Facebook"></a>
-                <a href="https://plus.google.com/share?url=https://vieclam.thegioididong.com/recruitment?id=1632" class="google-plus" target="_blank" title="Google Plus"></a>
+                <a href="#" class="facebook" target="_blank" title="Facebook"></a>
+                <a href="#" class="google-plus" target="_blank" title="Google Plus"></a>
             </div>
             <div class="clear"></div>
         </div>

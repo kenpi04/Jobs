@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+
+
 }
 
 
@@ -1599,6 +1601,7 @@ header {
         font-size: 90%;
         margin-bottom: 0;
         margin-left: 50px;
+        margin-top:0
     }
 
     .list-group-item .item-content h3 {
