@@ -19,5 +19,28 @@ namespace Job.Services.Account
         {
             return _userRepository.First(x => x.UserName == username);
         }
+
+
+        public IList<User> GetAll()
+        {
+            return _userRepository.Table.ToList() ;
+        }
+
+
+        public User GetById(int id)
+        {
+            return _userRepository.GetById(id);
+        }
+
+
+        public void Insert(User model)
+        {
+            _userRepository.Insert(model);
+        }
+
+        public void Update(User user)
+        {
+            _userRepository.Update(user);
+        }
     }
 }

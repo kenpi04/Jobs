@@ -1908,7 +1908,7 @@ header {
         width: 36px;
         height: 36px;
         margin-right: 2px;
-        background: url("/Content/themes/Recruitment/Images/facebook-logo.png") no-repeat;
+        background: url("Images/facebook-logo.png") no-repeat;
     }
 
     .box-social a.google-plus {
@@ -1916,7 +1916,7 @@ header {
         width: 36px;
         height: 36px;
         margin-right: 2px;
-        background: url("/Content/themes/Recruitment/Images/google-logo.png") no-repeat;
+        background: url("Images/google-logo.png") no-repeat;
     }
 
 .gap {

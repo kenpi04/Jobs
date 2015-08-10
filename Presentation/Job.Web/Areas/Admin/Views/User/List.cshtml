@@ -1,0 +1,45 @@
+﻿@model List<Job.Core.Domain.User>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="well">
+    <ol class="breadcrumb">
+        <li><a href="/admin">Home</a></li>
+        <li class="active">User</li>
+    </ol>
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Danh sách user</div>
+    <div class="panel-body">
+        <div class="pull-right">
+            <a href="@Url.Action("Create")" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Id</th>
+            <th>User</th>
+            <td>Tên</td>
+            <td></td>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.UserName</td>
+                <td>@i.Name</td>
+
+                <td>
+                    <a href="@Url.Action("Create", new {id=i.Id })"><span class="glyphicon glyphicon-edit">Sửa</span></a> |
+                    <a data-id="@i.Id" href="#" onclick="deleteNews(@i.Id)" class="delete"><span class="glyphicon glyphicon-remove">Xóa</span></a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

@@ -32,7 +32,7 @@ namespace Job.Data
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().ToTable("Users").HasKey(x=>x.Id);
+            modelBuilder.Entity<User>().ToTable("Users").HasKey(x=>x.Id).Ignore(x=>x.RePassword);
            var news= modelBuilder.Entity<News>().ToTable("News").HasKey(x => x.Id);
            news.HasRequired(x => x.StateProvince).WithMany().HasForeignKey(x => x.ProvinceId);
            news.HasOptional(x => x.District).WithMany().HasForeignKey(x => x.DistrictId);

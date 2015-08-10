@@ -119,7 +119,7 @@
                         @foreach(var item in Model.CareerNewsShop)
                         { 
                         <p style="margin: 8px">
-                            • @item.Shop.ShopAddress
+                            • @item.Shop.ShopAddress (@item.Quantity)
                             <br>
                             <span style="color: red">Hạn nộp: @item.EndDate.ToString("dd/MM/yyyy")</span>
                         </p>

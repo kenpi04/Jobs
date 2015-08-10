@@ -10,5 +10,13 @@ namespace Job.Services.Account
    public interface IUserService
     {
        User GetUserByUserName(string username);
+
+       IList<User> GetAll();
+
+       User GetById(int id);
+
+       void Insert(User model);
+
+       void Update(User user);
     }
 }

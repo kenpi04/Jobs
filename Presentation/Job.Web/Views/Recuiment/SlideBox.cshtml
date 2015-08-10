@@ -14,8 +14,8 @@
 
 
             //$.noConflict();
-            jQuery(document).ready(function ($) {
-                jQuery('.slider2').bxSlider({
+            $(document).ready(function ($) {
+                $('.slider2').bxSlider({
                     slideWidth: 210,
                     minSlides: 2,
                     maxSlides: 3,
@@ -41,23 +41,7 @@
     </div>
     <div class="box-list">
         <div class="box-quickslider">
-            <script>
-                //$.noConflict();
-                jQuery(document).ready(function ($) {
-                    jQuery('.slider2').bxSlider({
-                        slideWidth: 210,
-                        minSlides: 2,
-                        maxSlides: 3,
-                        slideMargin: 10,
-                        nextSelector: '#slider-next',
-                        prevSelector: '#slider-prev',
-                        nextText: '›',
-                        prevText: '‹',
-                        pager: false,
-                        auto: true,
-                    });
-                });
-            </script>
+  
             <div class="bx-wrapper">
                 <div class="slider2">
                     @foreach (var item in Model)

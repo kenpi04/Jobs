@@ -183,6 +183,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecuimentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\AccountController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -208,7 +209,9 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Images\camera.jpg" />
     <Content Include="Content\Images\cd-top-arrow.svg" />
+    <Content Include="Content\Images\facebook-logo.png" />
     <Content Include="Content\Images\file-attach.png" />
+    <Content Include="Content\Images\google-logo.png" />
     <Content Include="Content\Images\hightlight.png" />
     <Content Include="Content\Images\logo_he4.png" />
     <Content Include="Content\Images\news-highlight.png" />
@@ -291,6 +294,8 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Views\User\List.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <None Include="Properties\PublishProfiles\JOBs.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
